@@ -9,6 +9,7 @@ export default function Transactions() {
     useTransactions({ month: selectedMonth })
   const { categories } = useCategories()
 
+
   const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState({
     amount: '',

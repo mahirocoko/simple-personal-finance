@@ -57,3 +57,5 @@ bun.lock
 dist/
 build/
 .output/
+
+.playwright-mcp
