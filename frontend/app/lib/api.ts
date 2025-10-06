@@ -1,56 +1,6 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
-
-export interface Category {
-  id: number
-  name: string
-  type: 'income' | 'expense'
-  color: string
-  icon: string
-  created_at: string
-}
-
-export interface Transaction {
-  id: number
-  amount: number
-  type: 'income' | 'expense'
-  category_id: number
-  category_name?: string
-  category_color?: string
-  category_icon?: string
-  description?: string
-  date: string
-  created_at: string
-  updated_at: string
-}
-
-export interface Goal {
-  id: number
-  name: string
-  target_amount: number
-  current_amount: number
-  progress_percentage?: number
-  remaining_amount?: number
-  deadline?: string
-  created_at: string
-  updated_at: string
-}
-
-export interface TransactionSummary {
-  total_income: number
-  total_expense: number
-  balance: number
-  transaction_count: number
-}
-
-export interface CategoryBreakdown {
-  id: number
-  name: string
-  type: 'income' | 'expense'
-  color: string
-  icon: string
-  transaction_count: number
-  total_amount: number
-}
+import { API_BASE_URL } from '../constants/api'
+import type { ICategory, IGoal, ITransaction } from '../types/models'
+import type { ICategoryBreakdown, ITransactionSummary, TransactionSummaryResponse } from '../types/api'
 
 class ApiClient {
   private baseUrl: string
@@ -61,7 +11,7 @@ class ApiClient {
 
   private async request<T>(
     endpoint: string,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<{ success: boolean; data?: T; error?: string }> {
     try {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
@@ -90,22 +40,22 @@ class ApiClient {
 
   // Categories
   async getCategories() {
-    return this.request<Category[]>('/categories')
+    return this.request<ICategory[]>('/categories')
   }
 
   async getCategory(id: number) {
-    return this.request<Category>(`/categories/${id}`)
+    return this.request<ICategory>(`/categories/${id}`)
   }
 
-  async createCategory(data: Partial<Category>) {
-    return this.request<Category>('/categories', {
+  async createCategory(data: Partial<ICategory>) {
+    return this.request<ICategory>('/categories', {
       method: 'POST',
       body: JSON.stringify(data),
     })
   }
 
-  async updateCategory(id: number, data: Partial<Category>) {
-    return this.request<Category>(`/categories/${id}`, {
+  async updateCategory(id: number, data: Partial<ICategory>) {
+    return this.request<ICategory>(`/categories/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     })
@@ -126,35 +76,30 @@ class ApiClient {
     const params = new URLSearchParams()
     if (filters?.month) params.append('month', filters.month)
     if (filters?.type) params.append('type', filters.type)
-    if (filters?.category_id)
-      params.append('category_id', filters.category_id.toString())
+    if (filters?.category_id) params.append('category_id', filters.category_id.toString())
 
     const query = params.toString() ? `?${params.toString()}` : ''
-    return this.request<Transaction[]>(`/transactions${query}`)
+    return this.request<ITransaction[]>(`/transactions${query}`)
   }
 
   async getTransactionSummary(month?: string) {
     const params = month ? `?month=${month}` : ''
-    return this.request<{
-      month: string
-      summary: TransactionSummary
-      categoryBreakdown: CategoryBreakdown[]
-    }>(`/transactions/summary${params}`)
+    return this.request<TransactionSummaryResponse>(`/transactions/summary${params}`)
   }
 
   async getTransaction(id: number) {
-    return this.request<Transaction>(`/transactions/${id}`)
+    return this.request<ITransaction>(`/transactions/${id}`)
   }
 
-  async createTransaction(data: Partial<Transaction>) {
-    return this.request<Transaction>('/transactions', {
+  async createTransaction(data: Partial<ITransaction>) {
+    return this.request<ITransaction>('/transactions', {
       method: 'POST',
       body: JSON.stringify(data),
     })
   }
 
-  async updateTransaction(id: number, data: Partial<Transaction>) {
-    return this.request<Transaction>(`/transactions/${id}`, {
+  async updateTransaction(id: number, data: Partial<ITransaction>) {
+    return this.request<ITransaction>(`/transactions/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     })
@@ -168,26 +113,28 @@ class ApiClient {
 
   // Goals
   async getGoals() {
-    return this.request<Goal[]>('/goals')
+    return this.request<IGoal[]>('/goals')
   }
 
   async getGoal(id: number) {
-    return this.request<Goal>(`/goals/${id}`)
+    return this.request<IGoal>(`/goals/${id}`)
   }
 
   async getGoalProgress(id: number) {
-    return this.request<Goal & { daysRemaining: number | null; isOverdue: boolean; isCompleted: boolean }>(`/goals/${id}/progress`)
+    return this.request<IGoal & { daysRemaining: number | null; isOverdue: boolean; isCompleted: boolean }>(
+      `/goals/${id}/progress`,
+    )
   }
 
-  async createGoal(data: Partial<Goal>) {
-    return this.request<Goal>('/goals', {
+  async createGoal(data: Partial<IGoal>) {
+    return this.request<IGoal>('/goals', {
       method: 'POST',
       body: JSON.stringify(data),
     })
   }
 
-  async updateGoal(id: number, data: Partial<Goal>) {
-    return this.request<Goal>(`/goals/${id}`, {
+  async updateGoal(id: number, data: Partial<IGoal>) {
+    return this.request<IGoal>(`/goals/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     })
@@ -201,3 +148,14 @@ class ApiClient {
 }
 
 export const api = new ApiClient(API_BASE_URL)
+
+export type {
+  ICategory,
+  ITransaction,
+  IGoal,
+} from '../types/models'
+export type {
+  ITransactionSummary,
+  ICategoryBreakdown,
+  TransactionSummaryResponse,
+} from '../types/api'

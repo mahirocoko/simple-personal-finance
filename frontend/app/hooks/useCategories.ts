@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
-import { api, type Category } from '../lib/api'
+import { ErrorCode } from '../enums/error'
+import { useFetchError } from './use-fetch-error'
+import { api } from '../lib/api'
+import type { Category } from '../types/models'
 
 export function useCategories() {
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<ErrorCode | null>(null)
+  const { showErrorMessage } = useFetchError()
 
   const fetchCategories = async () => {
     setLoading(true)
@@ -13,7 +17,8 @@ export function useCategories() {
     if (result.success && result.data) {
       setCategories(result.data)
     } else {
-      setError(result.error || 'Failed to fetch categories')
+      const { code } = showErrorMessage(result.error, 'Failed to fetch categories')
+      setError(code)
     }
     setLoading(false)
   }

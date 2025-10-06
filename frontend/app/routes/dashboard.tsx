@@ -1,14 +1,17 @@
 import { useTransactionSummary } from '../hooks/useTransactions'
+import { SummaryCard } from '~/components/ui/summary-card'
+import { LoadingSpinner } from '~/components/ui/loading-spinner'
+import { ErrorMessage } from '~/components/ui/error-message'
 
 export default function Dashboard() {
-  const currentMonth = new Date().toISOString().slice(0, 7) // YYYY-MM
+  const currentMonth = new Date().toISOString().slice(0, 7)
   const { summary, loading, error } = useTransactionSummary(currentMonth)
 
   if (loading) {
     return (
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-        <p>Loading...</p>
+        <LoadingSpinner />
       </div>
     )
   }
@@ -17,7 +20,7 @@ export default function Dashboard() {
     return (
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-        <p className="text-red-500">Error: {error}</p>
+        <ErrorMessage message={error} />
       </div>
     )
   }
@@ -32,32 +35,9 @@ export default function Dashboard() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="bg-green-100 p-6 rounded-lg shadow">
-          <h2 className="text-sm font-semibold text-green-800 mb-2">
-            รายรับ (Income)
-          </h2>
-          <p className="text-3xl font-bold text-green-900">
-            ฿{income.toLocaleString()}
-          </p>
-        </div>
-
-        <div className="bg-red-100 p-6 rounded-lg shadow">
-          <h2 className="text-sm font-semibold text-red-800 mb-2">
-            รายจ่าย (Expense)
-          </h2>
-          <p className="text-3xl font-bold text-red-900">
-            ฿{expense.toLocaleString()}
-          </p>
-        </div>
-
-        <div className="bg-blue-100 p-6 rounded-lg shadow">
-          <h2 className="text-sm font-semibold text-blue-800 mb-2">
-            คงเหลือ (Balance)
-          </h2>
-          <p className="text-3xl font-bold text-blue-900">
-            ฿{balance.toLocaleString()}
-          </p>
-        </div>
+        <SummaryCard title="รายรับ (Income)" amount={income} variant="income" />
+        <SummaryCard title="รายจ่าย (Expense)" amount={expense} variant="expense" />
+        <SummaryCard title="คงเหลือ (Balance)" amount={balance} variant="balance" />
       </div>
 
       {/* Category Breakdown */}
@@ -74,9 +54,7 @@ export default function Dashboard() {
                     <span className="font-medium">{category.name}</span>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold">
-                      ฿{category.total_amount.toLocaleString()}
-                    </p>
+                    <p className="font-bold">฿{category.total_amount.toLocaleString()}</p>
                     <p className="text-sm text-gray-500">
                       {category.transaction_count} รายการ
                     </p>

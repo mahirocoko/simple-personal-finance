@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
-import { api, type Transaction } from '../lib/api'
+import { ErrorCode } from '../enums/error'
+import { useFetchError } from './use-fetch-error'
+import { api } from '../lib/api'
+import type { Transaction } from '../types/models'
+import type { TransactionSummaryResponse } from '../types/api'
 
 interface UseTransactionsOptions {
   month?: string
@@ -10,7 +14,8 @@ interface UseTransactionsOptions {
 export function useTransactions(options: UseTransactionsOptions = {}) {
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<ErrorCode | null>(null)
+  const { showErrorMessage } = useFetchError()
 
   const fetchTransactions = async () => {
     setLoading(true)
@@ -19,7 +24,8 @@ export function useTransactions(options: UseTransactionsOptions = {}) {
     if (result.success && result.data) {
       setTransactions(result.data)
     } else {
-      setError(result.error || 'Failed to fetch transactions')
+      const { code } = showErrorMessage(result.error, 'Failed to fetch transactions')
+      setError(code)
     }
     setLoading(false)
   }
@@ -64,9 +70,10 @@ export function useTransactions(options: UseTransactionsOptions = {}) {
 }
 
 export function useTransactionSummary(month?: string) {
-  const [summary, setSummary] = useState<any>(null)
+  const [summary, setSummary] = useState<TransactionSummaryResponse | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<ErrorCode | null>(null)
+  const { showErrorMessage } = useFetchError()
 
   const fetchSummary = async () => {
     setLoading(true)
@@ -75,7 +82,8 @@ export function useTransactionSummary(month?: string) {
     if (result.success && result.data) {
       setSummary(result.data)
     } else {
-      setError(result.error || 'Failed to fetch summary')
+      const { code } = showErrorMessage(result.error, 'Failed to fetch summary')
+      setError(code)
     }
     setLoading(false)
   }

@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
-import { api, type Goal } from '../lib/api'
+import { ErrorCode } from '../enums/error'
+import { useFetchError } from './use-fetch-error'
+import { api } from '../lib/api'
+import type { Goal } from '../types/models'
 
 export function useGoals() {
   const [goals, setGoals] = useState<Goal[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<ErrorCode | null>(null)
+  const { showErrorMessage } = useFetchError()
 
   const fetchGoals = async () => {
     setLoading(true)
@@ -13,7 +17,8 @@ export function useGoals() {
     if (result.success && result.data) {
       setGoals(result.data)
     } else {
-      setError(result.error || 'Failed to fetch goals')
+      const { code } = showErrorMessage(result.error, 'Failed to fetch goals')
+      setError(code)
     }
     setLoading(false)
   }
