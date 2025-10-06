@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { ErrorCode } from '../enums/error'
 import { useFetchError } from './use-fetch-error'
 import { api } from '../lib/api'
-import type { Category } from '../types/models'
+import type { ICategory } from '../types/models'
 
 export function useCategories() {
-  const [categories, setCategories] = useState<Category[]>([])
+  const [categories, setCategories] = useState<ICategory[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<ErrorCode | null>(null)
   const { showErrorMessage } = useFetchError()
@@ -27,7 +27,7 @@ export function useCategories() {
     fetchCategories()
   }, [])
 
-  const createCategory = async (data: Partial<Category>) => {
+  const createCategory = async (data: Partial<ICategory>) => {
     const result = await api.createCategory(data)
     if (result.success) {
       await fetchCategories()
@@ -35,7 +35,7 @@ export function useCategories() {
     return result
   }
 
-  const updateCategory = async (id: number, data: Partial<Category>) => {
+  const updateCategory = async (id: number, data: Partial<ICategory>) => {
     const result = await api.updateCategory(id, data)
     if (result.success) {
       await fetchCategories()

@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { ErrorCode } from '../enums/error'
 import { useFetchError } from './use-fetch-error'
 import { api } from '../lib/api'
-import type { Goal } from '../types/models'
+import type { IGoal } from '../types/models'
 
 export function useGoals() {
-  const [goals, setGoals] = useState<Goal[]>([])
+  const [goals, setGoals] = useState<IGoal[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<ErrorCode | null>(null)
   const { showErrorMessage } = useFetchError()
@@ -27,7 +27,7 @@ export function useGoals() {
     fetchGoals()
   }, [])
 
-  const createGoal = async (data: Partial<Goal>) => {
+  const createGoal = async (data: Partial<IGoal>) => {
     const result = await api.createGoal(data)
     if (result.success) {
       await fetchGoals()
@@ -35,7 +35,7 @@ export function useGoals() {
     return result
   }
 
-  const updateGoal = async (id: number, data: Partial<Goal>) => {
+  const updateGoal = async (id: number, data: Partial<IGoal>) => {
     const result = await api.updateGoal(id, data)
     if (result.success) {
       await fetchGoals()

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ErrorCode } from '../enums/error'
 import { useFetchError } from './use-fetch-error'
 import { api } from '../lib/api'
-import type { Transaction } from '../types/models'
+import type { ITransaction } from '../types/models'
 import type { TransactionSummaryResponse } from '../types/api'
 
 interface UseTransactionsOptions {
@@ -12,7 +12,7 @@ interface UseTransactionsOptions {
 }
 
 export function useTransactions(options: UseTransactionsOptions = {}) {
-  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [transactions, setTransactions] = useState<ITransaction[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<ErrorCode | null>(null)
   const { showErrorMessage } = useFetchError()
@@ -34,7 +34,7 @@ export function useTransactions(options: UseTransactionsOptions = {}) {
     fetchTransactions()
   }, [options.month, options.type, options.category_id])
 
-  const createTransaction = async (data: Partial<Transaction>) => {
+  const createTransaction = async (data: Partial<ITransaction>) => {
     const result = await api.createTransaction(data)
     if (result.success) {
       await fetchTransactions()
@@ -42,7 +42,7 @@ export function useTransactions(options: UseTransactionsOptions = {}) {
     return result
   }
 
-  const updateTransaction = async (id: number, data: Partial<Transaction>) => {
+  const updateTransaction = async (id: number, data: Partial<ITransaction>) => {
     const result = await api.updateTransaction(id, data)
     if (result.success) {
       await fetchTransactions()
