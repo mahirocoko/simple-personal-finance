@@ -149,13 +149,5 @@ class ApiClient {
 
 export const api = new ApiClient(API_BASE_URL)
 
-export type {
-  ICategory,
-  ITransaction,
-  IGoal,
-} from '../types/models'
-export type {
-  ITransactionSummary,
-  ICategoryBreakdown,
-  TransactionSummaryResponse,
-} from '../types/api'
+export type { ICategory, ITransaction, IGoal } from '../types/models'
+export type { ITransactionSummary, ICategoryBreakdown, TransactionSummaryResponse } from '../types/api'
