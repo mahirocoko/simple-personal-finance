@@ -1,37 +1,12 @@
 import { useLingui } from '@lingui/react/macro'
 import { useState } from 'react'
+import { GoalForm } from '~/components/forms'
 import { useGoals } from '../hooks/useGoals'
 
 export default function Goals() {
 	const { t } = useLingui()
 	const { goals, loading, error, createGoal, updateGoal, deleteGoal } = useGoals()
 	const [showForm, setShowForm] = useState(false)
-	const [formData, setFormData] = useState({
-		name: '',
-		target_amount: '',
-		current_amount: '',
-		deadline: '',
-	})
-
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault()
-		const result = await createGoal({
-			name: formData.name,
-			target_amount: Number.parseFloat(formData.target_amount),
-			current_amount: Number.parseFloat(formData.current_amount) || 0,
-			deadline: formData.deadline || undefined,
-		})
-
-		if (result.success) {
-			setShowForm(false)
-			setFormData({
-				name: '',
-				target_amount: '',
-				current_amount: '',
-				deadline: '',
-			})
-		}
-	}
 
 	const handleAddProgress = async (goalId: number, currentAmount: number) => {
 		const amount = prompt(t`Add amount:`)
@@ -60,63 +35,7 @@ export default function Goals() {
 			</div>
 
 			{/* Form */}
-			{showForm && (
-				<form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg mb-6 space-y-4">
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div>
-							<label className="block mb-2 font-semibold">{t`Goal Name`}</label>
-							<input
-								type="text"
-								value={formData.name}
-								onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-								className="border p-2 rounded w-full"
-								required
-								placeholder={t`e.g. Buy a new car`}
-							/>
-						</div>
-
-						<div>
-							<label className="block mb-2 font-semibold">{t`Target Amount (฿)`}</label>
-							<input
-								type="number"
-								step="0.01"
-								value={formData.target_amount}
-								onChange={(e) => setFormData({ ...formData, target_amount: e.target.value })}
-								className="border p-2 rounded w-full"
-								required
-								min="0.01"
-							/>
-						</div>
-
-						<div>
-							<label className="block mb-2 font-semibold">{t`Saved Amount (฿)`}</label>
-							<input
-								type="number"
-								step="0.01"
-								value={formData.current_amount}
-								onChange={(e) => setFormData({ ...formData, current_amount: e.target.value })}
-								className="border p-2 rounded w-full"
-								min="0"
-								placeholder="0"
-							/>
-						</div>
-
-						<div>
-							<label className="block mb-2 font-semibold">{t`Deadline (Optional)`}</label>
-							<input
-								type="date"
-								value={formData.deadline}
-								onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-								className="border p-2 rounded w-full"
-							/>
-						</div>
-					</div>
-
-					<button type="submit" className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
-						{t`Create Goal`}
-					</button>
-				</form>
-			)}
+			{showForm && <GoalForm onSubmit={createGoal} onCancel={() => setShowForm(false)} />}
 
 			{/* List */}
 			{loading ? (

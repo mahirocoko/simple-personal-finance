@@ -14,39 +14,47 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. placeholder {0}: category.transaction_count
-#: app/routes/dashboard.tsx:61
+#: app/routes/dashboard.tsx:60
 msgid "{0} transactions"
 msgstr "{0} transactions"
 
-#: app/routes/goals.tsx:58
+#: app/routes/goals.tsx:33
 msgid "+ Add Goal"
 msgstr "+ Add Goal"
 
-#: app/routes/goals.tsx:168
+#: app/routes/goals.tsx:95
 msgid "+ Add Savings"
 msgstr "+ Add Savings"
 
-#: app/routes/transactions.tsx:62
+#: app/routes/transactions.tsx:32
 msgid "+ Add Transaction"
 msgstr "+ Add Transaction"
 
-#: app/routes/goals.tsx:171
+#: app/routes/goals.tsx:98
 msgid "✓ Completed!"
 msgstr "✓ Completed!"
 
-#: app/routes/goals.tsx:37
+#: app/routes/goals.tsx:12
 msgid "Add amount:"
 msgstr "Add amount:"
 
-#: app/routes/transactions.tsx:101
+#: app/components/forms/transaction-form.tsx:101
 msgid "Amount"
 msgstr "Amount"
 
-#: app/routes/goals.tsx:45
+#: app/components/forms/goal-form.tsx:60
+msgid "An error occurred while creating the goal. Please try again."
+msgstr "An error occurred while creating the goal. Please try again."
+
+#: app/components/forms/transaction-form.tsx:62
+msgid "An error occurred while creating the transaction. Please try again."
+msgstr "An error occurred while creating the transaction. Please try again."
+
+#: app/routes/goals.tsx:20
 msgid "Are you sure you want to delete this goal?"
 msgstr "Are you sure you want to delete this goal?"
 
-#: app/routes/transactions.tsx:47
+#: app/routes/transactions.tsx:19
 msgid "Are you sure you want to delete this transaction?"
 msgstr "Are you sure you want to delete this transaction?"
 
@@ -54,54 +62,60 @@ msgstr "Are you sure you want to delete this transaction?"
 msgid "Balance"
 msgstr "Balance"
 
-#: app/routes/goals.tsx:58
-#: app/routes/transactions.tsx:62
+#: app/components/forms/goal-form.tsx:166
+#: app/components/forms/transaction-form.tsx:158
+#: app/routes/goals.tsx:33
+#: app/routes/transactions.tsx:32
 msgid "Cancel"
 msgstr "Cancel"
 
-#: app/routes/transactions.tsx:114
+#: app/components/forms/transaction-form.tsx:112
 msgid "Category"
 msgstr "Category"
 
-#: app/routes/goals.tsx:116
+#: app/components/forms/goal-form.tsx:154
 msgid "Create Goal"
 msgstr "Create Goal"
 
-#: app/root.tsx:53
+#: app/components/forms/goal-form.tsx:154
+msgid "Creating..."
+msgstr "Creating..."
+
+#: app/root.tsx:57
 #: app/routes/dashboard.tsx:15
 #: app/routes/dashboard.tsx:24
 #: app/routes/dashboard.tsx:36
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: app/routes/transactions.tsx:131
+#: app/components/forms/transaction-form.tsx:125
 msgid "Date"
 msgstr "Date"
 
-#: app/routes/goals.tsx:160
+#: app/routes/goals.tsx:83
 msgid "Deadline"
 msgstr "Deadline"
 
-#: app/routes/goals.tsx:105
+#: app/components/forms/goal-form.tsx:119
 msgid "Deadline (Optional)"
 msgstr "Deadline (Optional)"
 
-#: app/routes/goals.tsx:139
-#: app/routes/transactions.tsx:183
+#: app/routes/goals.tsx:60
+#: app/routes/transactions.tsx:83
 msgid "Delete"
 msgstr "Delete"
 
-#: app/routes/goals.tsx:74
+#: app/components/forms/goal-form.tsx:89
 msgid "e.g. Buy a new car"
 msgstr "e.g. Buy a new car"
 
-#: app/routes/goals.tsx:125
-#: app/routes/transactions.tsx:162
+#: app/routes/goals.tsx:45
+#: app/routes/transactions.tsx:61
 msgid "Error"
 msgstr "Error"
 
+#: app/components/forms/transaction-form.tsx:91
 #: app/routes/dashboard.tsx:41
-#: app/routes/transactions.tsx:95
 msgid "Expense"
 msgstr "Expense"
 
@@ -109,74 +123,94 @@ msgstr "Expense"
 msgid "Expense by Category"
 msgstr "Expense by Category"
 
-#: app/routes/goals.tsx:67
+#: app/components/forms/goal-form.tsx:56
+msgid "Failed to create goal. Please try again."
+msgstr "Failed to create goal. Please try again."
+
+#: app/components/forms/transaction-form.tsx:58
+msgid "Failed to create transaction. Please try again."
+msgstr "Failed to create transaction. Please try again."
+
+#: app/components/forms/goal-form.tsx:87
 msgid "Goal Name"
 msgstr "Goal Name"
 
+#: app/components/forms/transaction-form.tsx:92
 #: app/routes/dashboard.tsx:40
-#: app/routes/transactions.tsx:96
 msgid "Income"
 msgstr "Income"
 
-#: app/routes/goals.tsx:123
-#: app/routes/transactions.tsx:160
+#: app/routes/goals.tsx:42
+#: app/routes/transactions.tsx:58
 msgid "Loading..."
 msgstr "Loading..."
 
-#: app/routes/goals.tsx:127
+#: app/routes/goals.tsx:48
 msgid "No goals yet"
 msgstr "No goals yet"
 
-#: app/routes/transactions.tsx:164
+#: app/routes/transactions.tsx:64
 msgid "No transactions this month"
 msgstr "No transactions this month"
 
-#: app/routes/transactions.tsx:143
+#: app/components/forms/transaction-form.tsx:135
 msgid "Note"
 msgstr "Note"
 
-#: app/root.tsx:50
+#: app/components/forms/transaction-form.tsx:136
+msgid "Optional description"
+msgstr "Optional description"
+
+#: app/root.tsx:54
 msgid "Personal Finance"
 msgstr "Personal Finance"
 
-#: app/routes/goals.tsx:161
+#: app/components/forms/goal-form.tsx:129
+msgid "Progress Preview"
+msgstr "Progress Preview"
+
+#: app/routes/goals.tsx:87
 msgid "Remaining"
 msgstr "Remaining"
 
-#: app/routes/transactions.tsx:153
+#: app/components/forms/transaction-form.tsx:146
 msgid "Save"
 msgstr "Save"
 
-#: app/routes/goals.tsx:92
+#: app/components/forms/goal-form.tsx:109
 msgid "Saved Amount (฿)"
 msgstr "Saved Amount (฿)"
 
-#: app/root.tsx:59
-#: app/routes/goals.tsx:53
+#: app/components/forms/transaction-form.tsx:146
+msgid "Saving..."
+msgstr "Saving..."
+
+#: app/root.tsx:63
+#: app/routes/goals.tsx:28
 msgid "Savings Goals"
 msgstr "Savings Goals"
 
-#: app/routes/transactions.tsx:121
+#: app/components/forms/transaction-form.tsx:117
 msgid "Select Category"
 msgstr "Select Category"
 
-#: app/components/ui/locale-switcher.tsx:17
+#: app/components/ui/locale-switcher.tsx:24
 msgid "Select language"
 msgstr "Select language"
 
-#: app/routes/transactions.tsx:68
+#: app/routes/transactions.tsx:38
 msgid "Select Month"
 msgstr "Select Month"
 
-#: app/routes/goals.tsx:79
+#: app/components/forms/goal-form.tsx:98
 msgid "Target Amount (฿)"
 msgstr "Target Amount (฿)"
 
-#: app/root.tsx:56
-#: app/routes/transactions.tsx:57
+#: app/root.tsx:60
+#: app/routes/transactions.tsx:27
 msgid "Transactions"
 msgstr "Transactions"
 
-#: app/routes/transactions.tsx:82
+#: app/components/forms/transaction-form.tsx:89
 msgid "Type"
 msgstr "Type"
