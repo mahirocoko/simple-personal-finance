@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { useLingui } from '@lingui/react/macro'
+import { useState } from 'react'
 import { useGoals } from '../hooks/useGoals'
 
 export default function Goals() {
@@ -17,8 +17,8 @@ export default function Goals() {
 		e.preventDefault()
 		const result = await createGoal({
 			name: formData.name,
-			target_amount: parseFloat(formData.target_amount),
-			current_amount: parseFloat(formData.current_amount) || 0,
+			target_amount: Number.parseFloat(formData.target_amount),
+			current_amount: Number.parseFloat(formData.current_amount) || 0,
 			deadline: formData.deadline || undefined,
 		})
 
@@ -36,7 +36,7 @@ export default function Goals() {
 	const handleAddProgress = async (goalId: number, currentAmount: number) => {
 		const amount = prompt(t`Add amount:`)
 		if (amount) {
-			const newAmount = currentAmount + parseFloat(amount)
+			const newAmount = currentAmount + Number.parseFloat(amount)
 			await updateGoal(goalId, { current_amount: newAmount })
 		}
 	}
@@ -122,7 +122,9 @@ export default function Goals() {
 			{loading ? (
 				<p>{t`Loading...`}</p>
 			) : error ? (
-				<p className="text-red-500">{t`Error`}: {error}</p>
+				<p className="text-red-500">
+					{t`Error`}: {error}
+				</p>
 			) : goals.length === 0 ? (
 				<p className="text-gray-500">{t`No goals yet`}</p>
 			) : (
@@ -157,8 +159,14 @@ export default function Goals() {
 
 								<div className="flex justify-between items-center">
 									<div className="text-sm text-gray-600">
-										{goal.deadline && <p>{t`Deadline`}: {new Date(goal.deadline).toLocaleDateString()}</p>}
-										<p>{t`Remaining`}: ฿{(goal.remaining_amount || 0).toLocaleString()}</p>
+										{goal.deadline && (
+											<p>
+												{t`Deadline`}: {new Date(goal.deadline).toLocaleDateString()}
+											</p>
+										)}
+										<p>
+											{t`Remaining`}: ฿{(goal.remaining_amount || 0).toLocaleString()}
+										</p>
 									</div>
 									{!isCompleted && (
 										<button

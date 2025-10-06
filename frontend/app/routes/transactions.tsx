@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import { useLingui } from '@lingui/react/macro'
-import { useTransactions } from '../hooks/useTransactions'
+import { useState } from 'react'
 import { useCategories } from '../hooks/useCategories'
+import { useTransactions } from '../hooks/useTransactions'
 
 export default function Transactions() {
 	const { t } = useLingui()
@@ -24,9 +24,9 @@ export default function Transactions() {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
 		const result = await createTransaction({
-			amount: parseFloat(formData.amount),
+			amount: Number.parseFloat(formData.amount),
 			type: formData.type,
-			category_id: parseInt(formData.category_id),
+			category_id: Number.parseInt(formData.category_id),
 			description: formData.description,
 			date: formData.date,
 		})
@@ -159,7 +159,9 @@ export default function Transactions() {
 			{loading ? (
 				<p>{t`Loading...`}</p>
 			) : error ? (
-				<p className="text-red-500">{t`Error`}: {error}</p>
+				<p className="text-red-500">
+					{t`Error`}: {error}
+				</p>
 			) : transactions.length === 0 ? (
 				<p className="text-gray-500">{t`No transactions this month`}</p>
 			) : (
