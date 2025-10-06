@@ -1,8 +1,9 @@
-import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 import { I18nProvider } from '@lingui/react'
 import { useLingui } from '@lingui/react/macro'
-import { i18n } from './lib/i18n'
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse } from 'react-router'
 import { LocaleSwitcher } from './components/ui/locale-switcher'
+import { useLocaleSync } from './hooks/use-locale-sync'
+import { i18n } from './lib/i18n'
 
 import type { Route } from './+types/root'
 import './app.css'
@@ -40,6 +41,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 function AppContent() {
 	const { t } = useLingui()
+
+	// Sync locale changes across browser tabs
+	useLocaleSync()
 
 	return (
 		<div>
