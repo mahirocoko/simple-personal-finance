@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useLingui } from '@lingui/react/macro'
 import { useGoals } from '../hooks/useGoals'
 
 export default function Goals() {
+	const { t } = useLingui()
 	const { goals, loading, error, createGoal, updateGoal, deleteGoal } = useGoals()
 	const [showForm, setShowForm] = useState(false)
 	const [formData, setFormData] = useState({
@@ -32,7 +34,7 @@ export default function Goals() {
 	}
 
 	const handleAddProgress = async (goalId: number, currentAmount: number) => {
-		const amount = prompt('เพิ่มจำนวนเงิน:')
+		const amount = prompt(t`Add amount:`)
 		if (amount) {
 			const newAmount = currentAmount + parseFloat(amount)
 			await updateGoal(goalId, { current_amount: newAmount })
@@ -40,7 +42,7 @@ export default function Goals() {
 	}
 
 	const handleDelete = async (id: number) => {
-		if (confirm('ต้องการลบเป้าหมายนี้?')) {
+		if (confirm(t`Are you sure you want to delete this goal?`)) {
 			await deleteGoal(id)
 		}
 	}
@@ -48,12 +50,12 @@ export default function Goals() {
 	return (
 		<div className="container mx-auto p-4">
 			<div className="flex justify-between items-center mb-6">
-				<h1 className="text-3xl font-bold">เป้าหมายการออม</h1>
+				<h1 className="text-3xl font-bold">{t`Savings Goals`}</h1>
 				<button
 					onClick={() => setShowForm(!showForm)}
 					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
 				>
-					{showForm ? 'ยกเลิก' : '+ เพิ่มเป้าหมาย'}
+					{showForm ? t`Cancel` : t`+ Add Goal`}
 				</button>
 			</div>
 
@@ -62,19 +64,19 @@ export default function Goals() {
 				<form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg mb-6 space-y-4">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
-							<label className="block mb-2 font-semibold">ชื่อเป้าหมาย</label>
+							<label className="block mb-2 font-semibold">{t`Goal Name`}</label>
 							<input
 								type="text"
 								value={formData.name}
 								onChange={(e) => setFormData({ ...formData, name: e.target.value })}
 								className="border p-2 rounded w-full"
 								required
-								placeholder="เช่น ซื้อรถใหม่"
+								placeholder={t`e.g. Buy a new car`}
 							/>
 						</div>
 
 						<div>
-							<label className="block mb-2 font-semibold">เป้าหมาย (฿)</label>
+							<label className="block mb-2 font-semibold">{t`Target Amount (฿)`}</label>
 							<input
 								type="number"
 								step="0.01"
@@ -87,7 +89,7 @@ export default function Goals() {
 						</div>
 
 						<div>
-							<label className="block mb-2 font-semibold">ออมไปแล้ว (฿)</label>
+							<label className="block mb-2 font-semibold">{t`Saved Amount (฿)`}</label>
 							<input
 								type="number"
 								step="0.01"
@@ -100,7 +102,7 @@ export default function Goals() {
 						</div>
 
 						<div>
-							<label className="block mb-2 font-semibold">วันที่ครบกำหนด (ถ้ามี)</label>
+							<label className="block mb-2 font-semibold">{t`Deadline (Optional)`}</label>
 							<input
 								type="date"
 								value={formData.deadline}
@@ -111,18 +113,18 @@ export default function Goals() {
 					</div>
 
 					<button type="submit" className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
-						สร้างเป้าหมาย
+						{t`Create Goal`}
 					</button>
 				</form>
 			)}
 
 			{/* List */}
 			{loading ? (
-				<p>Loading...</p>
+				<p>{t`Loading...`}</p>
 			) : error ? (
-				<p className="text-red-500">Error: {error}</p>
+				<p className="text-red-500">{t`Error`}: {error}</p>
 			) : goals.length === 0 ? (
-				<p className="text-gray-500">ยังไม่มีเป้าหมาย</p>
+				<p className="text-gray-500">{t`No goals yet`}</p>
 			) : (
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					{goals.map((goal) => {
@@ -134,7 +136,7 @@ export default function Goals() {
 								<div className="flex justify-between items-start mb-4">
 									<h3 className="text-xl font-bold">{goal.name}</h3>
 									<button onClick={() => handleDelete(goal.id)} className="text-red-500 hover:text-red-700 text-sm">
-										ลบ
+										{t`Delete`}
 									</button>
 								</div>
 
@@ -155,18 +157,18 @@ export default function Goals() {
 
 								<div className="flex justify-between items-center">
 									<div className="text-sm text-gray-600">
-										{goal.deadline && <p>ครบกำหนด: {new Date(goal.deadline).toLocaleDateString('th-TH')}</p>}
-										<p>เหลือ: ฿{(goal.remaining_amount || 0).toLocaleString()}</p>
+										{goal.deadline && <p>{t`Deadline`}: {new Date(goal.deadline).toLocaleDateString()}</p>}
+										<p>{t`Remaining`}: ฿{(goal.remaining_amount || 0).toLocaleString()}</p>
 									</div>
 									{!isCompleted && (
 										<button
 											onClick={() => handleAddProgress(goal.id, goal.current_amount)}
 											className="bg-blue-500 text-white px-4 py-1 rounded text-sm hover:bg-blue-600"
 										>
-											+ เพิ่มเงินออม
+											{t`+ Add Savings`}
 										</button>
 									)}
-									{isCompleted && <span className="text-green-600 font-bold">✓ สำเร็จแล้ว!</span>}
+									{isCompleted && <span className="text-green-600 font-bold">{t`✓ Completed!`}</span>}
 								</div>
 							</div>
 						)

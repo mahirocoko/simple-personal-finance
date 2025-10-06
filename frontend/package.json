@@ -7,6 +7,8 @@
 		"dev": "react-router dev",
 		"format": "biome format --write .",
 		"lint": "biome check --write .",
+		"lingui:extract": "lingui extract",
+		"lingui:compile": "lingui compile",
 		"start": "react-router-serve ./build/server/index.js",
 		"typecheck": "react-router typegen && tsc"
 	},

@@ -1,6 +1,8 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 import { I18nProvider } from '@lingui/react'
+import { useLingui } from '@lingui/react/macro'
 import { i18n } from './lib/i18n'
+import { LocaleSwitcher } from './components/ui/locale-switcher'
 
 import type { Route } from './+types/root'
 import './app.css'
@@ -36,33 +38,44 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	)
 }
 
+function AppContent() {
+	const { t } = useLingui()
+
+	return (
+		<div>
+			{/* Navigation */}
+			<nav className="bg-blue-600 text-white p-4 shadow-md">
+				<div className="container mx-auto flex gap-6 items-center">
+					<a href="/" className="text-xl font-bold">
+						💰 {t`Personal Finance`}
+					</a>
+					<a href="/" className="hover:underline">
+						{t`Dashboard`}
+					</a>
+					<a href="/transactions" className="hover:underline">
+						{t`Transactions`}
+					</a>
+					<a href="/goals" className="hover:underline">
+						{t`Savings Goals`}
+					</a>
+					<div className="ml-auto">
+						<LocaleSwitcher />
+					</div>
+				</div>
+			</nav>
+
+			{/* Main content */}
+			<main className="min-h-screen bg-gray-50 py-4">
+				<Outlet />
+			</main>
+		</div>
+	)
+}
+
 export default function App() {
 	return (
 		<I18nProvider i18n={i18n}>
-			<div>
-				{/* Navigation */}
-				<nav className="bg-blue-600 text-white p-4 shadow-md">
-					<div className="container mx-auto flex gap-6 items-center">
-						<a href="/" className="text-xl font-bold">
-							💰 Personal Finance
-						</a>
-						<a href="/" className="hover:underline">
-							Dashboard
-						</a>
-						<a href="/transactions" className="hover:underline">
-							รายรับ-รายจ่าย
-						</a>
-						<a href="/goals" className="hover:underline">
-							เป้าหมาย
-						</a>
-					</div>
-				</nav>
-
-				{/* Main content */}
-				<main className="min-h-screen bg-gray-50 py-4">
-					<Outlet />
-				</main>
-			</div>
+			<AppContent />
 		</I18nProvider>
 	)
 }

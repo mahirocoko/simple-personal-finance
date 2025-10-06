@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { useLingui } from '@lingui/react/macro'
 import { useTransactions } from '../hooks/useTransactions'
 import { useCategories } from '../hooks/useCategories'
 
 export default function Transactions() {
+	const { t } = useLingui()
 	const currentMonth = new Date().toISOString().slice(0, 7)
 	const [selectedMonth, setSelectedMonth] = useState(currentMonth)
 	const { transactions, loading, error, createTransaction, deleteTransaction } = useTransactions({
@@ -42,7 +44,7 @@ export default function Transactions() {
 	}
 
 	const handleDelete = async (id: number) => {
-		if (confirm('ต้องการลบรายการนี้?')) {
+		if (confirm(t`Are you sure you want to delete this transaction?`)) {
 			await deleteTransaction(id)
 		}
 	}
@@ -52,18 +54,18 @@ export default function Transactions() {
 	return (
 		<div className="container mx-auto p-4">
 			<div className="flex justify-between items-center mb-6">
-				<h1 className="text-3xl font-bold">รายรับ-รายจ่าย</h1>
+				<h1 className="text-3xl font-bold">{t`Transactions`}</h1>
 				<button
 					onClick={() => setShowForm(!showForm)}
 					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
 				>
-					{showForm ? 'ยกเลิก' : '+ เพิ่มรายการ'}
+					{showForm ? t`Cancel` : t`+ Add Transaction`}
 				</button>
 			</div>
 
 			{/* Filter */}
 			<div className="mb-4">
-				<label className="block mb-2 font-semibold">เลือกเดือน:</label>
+				<label className="block mb-2 font-semibold">{t`Select Month`}:</label>
 				<input
 					type="month"
 					value={selectedMonth}
@@ -77,7 +79,7 @@ export default function Transactions() {
 				<form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg mb-6 space-y-4">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
-							<label className="block mb-2 font-semibold">ประเภท</label>
+							<label className="block mb-2 font-semibold">{t`Type`}</label>
 							<select
 								value={formData.type}
 								onChange={(e) =>
@@ -90,13 +92,13 @@ export default function Transactions() {
 								className="border p-2 rounded w-full"
 								required
 							>
-								<option value="expense">รายจ่าย</option>
-								<option value="income">รายรับ</option>
+								<option value="expense">{t`Expense`}</option>
+								<option value="income">{t`Income`}</option>
 							</select>
 						</div>
 
 						<div>
-							<label className="block mb-2 font-semibold">จำนวนเงิน</label>
+							<label className="block mb-2 font-semibold">{t`Amount`}</label>
 							<input
 								type="number"
 								step="0.01"
@@ -109,14 +111,14 @@ export default function Transactions() {
 						</div>
 
 						<div>
-							<label className="block mb-2 font-semibold">หมวดหมู่</label>
+							<label className="block mb-2 font-semibold">{t`Category`}</label>
 							<select
 								value={formData.category_id}
 								onChange={(e) => setFormData({ ...formData, category_id: e.target.value })}
 								className="border p-2 rounded w-full"
 								required
 							>
-								<option value="">เลือกหมวดหมู่</option>
+								<option value="">{t`Select Category`}</option>
 								{availableCategories.map((cat) => (
 									<option key={cat.id} value={cat.id}>
 										{cat.icon} {cat.name}
@@ -126,7 +128,7 @@ export default function Transactions() {
 						</div>
 
 						<div>
-							<label className="block mb-2 font-semibold">วันที่</label>
+							<label className="block mb-2 font-semibold">{t`Date`}</label>
 							<input
 								type="date"
 								value={formData.date}
@@ -138,7 +140,7 @@ export default function Transactions() {
 					</div>
 
 					<div>
-						<label className="block mb-2 font-semibold">หมายเหตุ</label>
+						<label className="block mb-2 font-semibold">{t`Note`}</label>
 						<textarea
 							value={formData.description}
 							onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -148,18 +150,18 @@ export default function Transactions() {
 					</div>
 
 					<button type="submit" className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
-						บันทึก
+						{t`Save`}
 					</button>
 				</form>
 			)}
 
 			{/* List */}
 			{loading ? (
-				<p>Loading...</p>
+				<p>{t`Loading...`}</p>
 			) : error ? (
-				<p className="text-red-500">Error: {error}</p>
+				<p className="text-red-500">{t`Error`}: {error}</p>
 			) : transactions.length === 0 ? (
-				<p className="text-gray-500">ไม่มีรายการในเดือนนี้</p>
+				<p className="text-gray-500">{t`No transactions this month`}</p>
 			) : (
 				<div className="space-y-2">
 					{transactions.map((tx) => (
@@ -178,7 +180,7 @@ export default function Transactions() {
 									{tx.type === 'income' ? '+' : '-'}฿{tx.amount.toLocaleString()}
 								</p>
 								<button onClick={() => handleDelete(tx.id)} className="text-red-500 hover:text-red-700">
-									ลบ
+									{t`Delete`}
 								</button>
 							</div>
 						</div>
