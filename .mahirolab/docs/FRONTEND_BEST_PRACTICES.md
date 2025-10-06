@@ -88,23 +88,36 @@ export function Button(props: IButtonProps) { ... }
 
 ### Component File Structure
 
-**Simple components → Single file:**
+**IMPORTANT: Use kebab-case for component file names**
+
+**Simple components → Single file with kebab-case:**
 ```
-components/
+components/ui/
+  button.tsx           # ✅ Correct
+  card.tsx             # ✅ Correct
+  badge.tsx            # ✅ Correct
+  error-message.tsx    # ✅ Correct
+  loading-spinner.tsx  # ✅ Correct
+
+  # ❌ WRONG - Don't use PascalCase
   Button.tsx
-  Card.tsx
-  Badge.tsx
+  ErrorMessage.tsx
 ```
 
-**Complex components with variants → Folder:**
+**Complex components with variants → Folder with PascalCase:**
 ```
 components/
-  Input/
+  Input/               # Folder uses PascalCase
     index.tsx          # Main component
-    InputNumber.tsx    # Variant
-    InputPassword.tsx  # Variant
-    InputSearch.tsx    # Variant
+    InputNumber.tsx    # Variant uses PascalCase
+    InputPassword.tsx  # Variant uses PascalCase
+    InputSearch.tsx    # Variant uses PascalCase
 ```
+
+**Naming Rules:**
+- **Simple single-file components:** kebab-case (e.g., `button.tsx`, `error-message.tsx`)
+- **Complex component folders:** PascalCase folder name (e.g., `Input/`)
+- **Variants inside folders:** PascalCase file names (e.g., `InputNumber.tsx`)
 
 **When to use folder:**
 - Multiple related components (Input variants)
