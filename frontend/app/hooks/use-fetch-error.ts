@@ -76,19 +76,20 @@ const parseErrorCode = (error: unknown): ErrorCode => {
 }
 
 export function useFetchError() {
-	const { t } = useLingui()
+	const { _ } = useLingui()
 
 	const getErrorCode = useCallback((error: unknown) => parseErrorCode(error), [])
 
 	const getErrorMessage = useCallback(
 		(code: ErrorCode, fallback?: string) => {
-			const baseMessage = t(ERROR_CODE_MESSAGE[code] || ERROR_CODE_MESSAGE[ErrorCode.UNKNOWN])
+			const messageKey = ERROR_CODE_MESSAGE[code] || ERROR_CODE_MESSAGE[ErrorCode.UNKNOWN]
+			const baseMessage = _(messageKey)
 			if (!fallback) {
 				return baseMessage
 			}
 			return `${baseMessage} (${fallback})`
 		},
-		[t],
+		[_],
 	)
 
 	const showErrorMessage = useCallback(

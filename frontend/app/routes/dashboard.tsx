@@ -2,7 +2,7 @@ import { useLingui } from '@lingui/react/macro'
 import { ErrorMessage } from '~/components/ui/error-message'
 import { LoadingSpinner } from '~/components/ui/loading-spinner'
 import { SummaryCard } from '~/components/ui/summary-card'
-import { useTransactionSummary } from '../hooks/useTransactions'
+import { useTransactionSummary } from '../hooks/use-transactions'
 
 export default function Dashboard() {
 	const { t } = useLingui()

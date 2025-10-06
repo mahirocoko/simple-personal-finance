@@ -6,28 +6,20 @@ import { z } from 'zod'
 export const goalSchema = z
 	.object({
 		name: z
-			.string({
-				required_error: 'Goal name is required',
-			})
+			.string({ message: 'Goal name is required' })
 			.min(1, 'Goal name is required')
 			.max(100, 'Goal name must be less than 100 characters')
 			.trim(),
 
 		target_amount: z
-			.number({
-				required_error: 'Target amount is required',
-				invalid_type_error: 'Target amount must be a number',
-			})
+			.number({ message: 'Target amount must be a number' })
 			.positive('Target amount must be greater than 0')
 			.finite('Target amount must be a valid number'),
 
 		current_amount: z
-			.number({
-				invalid_type_error: 'Current amount must be a number',
-			})
+			.number({ message: 'Current amount must be a number' })
 			.nonnegative('Current amount cannot be negative')
-			.finite('Current amount must be a valid number')
-			.default(0),
+			.finite('Current amount must be a valid number'),
 
 		deadline: z
 			.string()

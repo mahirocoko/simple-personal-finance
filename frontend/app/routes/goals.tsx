@@ -1,7 +1,7 @@
 import { useLingui } from '@lingui/react/macro'
 import { useState } from 'react'
 import { GoalForm } from '~/components/forms'
-import { useGoals } from '../hooks/useGoals'
+import { useGoals } from '../hooks/use-goals'
 
 export default function Goals() {
 	const { t } = useLingui()

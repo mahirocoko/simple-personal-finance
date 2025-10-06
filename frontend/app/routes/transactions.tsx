@@ -1,8 +1,8 @@
 import { useLingui } from '@lingui/react/macro'
 import { useState } from 'react'
 import { TransactionForm } from '~/components/forms'
-import { useCategories } from '../hooks/useCategories'
-import { useTransactions } from '../hooks/useTransactions'
+import { useCategories } from '../hooks/use-categories'
+import { useTransactions } from '../hooks/use-transactions'
 
 export default function Transactions() {
 	const { t } = useLingui()

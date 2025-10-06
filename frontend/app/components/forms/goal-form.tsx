@@ -26,10 +26,11 @@ export function GoalForm({ onSubmit, onCancel }: IGoalFormProps) {
 		resolver: zodResolver(goalSchema),
 		defaultValues: {
 			name: '',
-			target_amount: undefined,
+			target_amount: 0,
 			current_amount: 0,
 			deadline: '',
 		},
+		mode: 'onBlur',
 	})
 
 	// Watch values for progress indicator
@@ -70,7 +71,7 @@ export function GoalForm({ onSubmit, onCancel }: IGoalFormProps) {
 
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 				{/* Goal Name */}
-				<FormInput
+				<FormInput<GoalFormData>
 					name="name"
 					control={control}
 					label={t`Goal Name`}
@@ -81,7 +82,7 @@ export function GoalForm({ onSubmit, onCancel }: IGoalFormProps) {
 				/>
 
 				{/* Target Amount */}
-				<FormInput
+				<FormInput<GoalFormData>
 					name="target_amount"
 					control={control}
 					label={t`Target Amount (฿)`}
@@ -92,7 +93,7 @@ export function GoalForm({ onSubmit, onCancel }: IGoalFormProps) {
 				/>
 
 				{/* Current Amount */}
-				<FormInput
+				<FormInput<GoalFormData>
 					name="current_amount"
 					control={control}
 					label={t`Saved Amount (฿)`}
@@ -102,7 +103,7 @@ export function GoalForm({ onSubmit, onCancel }: IGoalFormProps) {
 				/>
 
 				{/* Deadline */}
-				<FormInput
+				<FormInput<GoalFormData>
 					name="deadline"
 					control={control}
 					label={t`Deadline (Optional)`}
