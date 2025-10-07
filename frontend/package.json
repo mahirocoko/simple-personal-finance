@@ -10,6 +10,9 @@
 		"lingui:extract": "lingui extract",
 		"lingui:compile": "lingui compile",
 		"start": "react-router-serve ./build/server/index.js",
+		"test": "vitest",
+		"test:ui": "vitest --ui",
+		"test:coverage": "vitest --coverage",
 		"typecheck": "react-router typegen && tsc"
 	},
 	"dependencies": {
@@ -35,13 +38,20 @@
 		"@lingui/vite-plugin": "5.5.0",
 		"@react-router/dev": "7.9.2",
 		"@tailwindcss/vite": "4.1.13",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/react": "^16.3.0",
+		"@testing-library/user-event": "^14.6.1",
 		"@types/node": "22.12.0",
 		"@types/react": "19.0.9",
 		"@types/react-dom": "19.0.5",
+		"@vitejs/plugin-react": "^4.7.0",
+		"@vitest/ui": "^3.2.4",
+		"jsdom": "^27.0.0",
 		"tailwindcss": "4.1.13",
 		"typescript": "5.9.2",
 		"vite": "7.1.7",
 		"vite-plugin-babel-macros": "^1.0.6",
-		"vite-tsconfig-paths": "5.1.4"
+		"vite-tsconfig-paths": "5.1.4",
+		"vitest": "^3.2.4"
 	}
 }

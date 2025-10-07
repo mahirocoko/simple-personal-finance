@@ -9,9 +9,9 @@ export const goalSchema = z
 	.object({
 		name: z
 			.string({ message: goalErrors.nameRequired })
+			.trim()
 			.min(1, goalErrors.nameRequired)
-			.max(100, goalErrors.nameTooLong)
-			.trim(),
+			.max(100, goalErrors.nameTooLong),
 
 		target_amount: z
 			.number({ message: goalErrors.targetAmountNumber })
