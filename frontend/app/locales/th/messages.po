@@ -38,15 +38,27 @@ msgstr "✓ สำเร็จแล้ว!"
 msgid "Add amount:"
 msgstr "เพิ่มจำนวนเงิน:"
 
-#: app/components/forms/transaction-form.tsx:101
+#: app/components/forms/transaction-form.tsx:87
 msgid "Amount"
 msgstr "จำนวนเงิน"
 
-#: app/components/forms/goal-form.tsx:60
+#: app/lib/zod-i18n.ts:37
+msgid "Amount must be a number"
+msgstr "จำนวนเงินต้องเป็นตัวเลข"
+
+#: app/lib/zod-i18n.ts:39
+msgid "Amount must be a valid number"
+msgstr "จำนวนเงินต้องเป็นตัวเลขที่ถูกต้อง"
+
+#: app/lib/zod-i18n.ts:38
+msgid "Amount must be greater than 0"
+msgstr "จำนวนเงินต้องมากกว่า 0"
+
+#: app/components/forms/goal-form.tsx:57
 msgid "An error occurred while creating the goal. Please try again."
 msgstr "เกิดข้อผิดพลาดในการสร้างเป้าหมาย กรุณาลองอีกครั้ง"
 
-#: app/components/forms/transaction-form.tsx:62
+#: app/components/forms/transaction-form.tsx:55
 msgid "An error occurred while creating the transaction. Please try again."
 msgstr "เกิดข้อผิดพลาดในการสร้างรายการ กรุณาลองอีกครั้ง"
 
@@ -62,24 +74,52 @@ msgstr "ต้องการลบรายการนี้?"
 msgid "Balance"
 msgstr "คงเหลือ"
 
-#: app/components/forms/goal-form.tsx:166
-#: app/components/forms/transaction-form.tsx:158
+#: app/components/forms/goal-form.tsx:154
+#: app/components/forms/transaction-form.tsx:133
 #: app/routes/goals.tsx:33
 #: app/routes/transactions.tsx:32
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: app/components/forms/transaction-form.tsx:112
+#: app/lib/zod-i18n.ts:14
+msgid "Cannot be negative"
+msgstr "ต้องไม่ติดลบ"
+
+#: app/components/forms/transaction-form.tsx:98
 msgid "Category"
 msgstr "หมวดหมู่"
 
-#: app/components/forms/goal-form.tsx:154
+#: app/lib/zod-i18n.ts:42
+msgid "Category must be a valid ID"
+msgstr "หมวดหมู่ต้องถูกต้อง"
+
+#: app/lib/zod-i18n.ts:41
+msgid "Category must be selected"
+msgstr "กรุณาเลือกหมวดหมู่"
+
+#: app/components/forms/goal-form.tsx:142
 msgid "Create Goal"
 msgstr "สร้างเป้าหมาย"
 
-#: app/components/forms/goal-form.tsx:154
+#: app/components/forms/goal-form.tsx:142
 msgid "Creating..."
 msgstr "กำลังสร้าง..."
+
+#: app/lib/zod-i18n.ts:56
+msgid "Current amount cannot be negative"
+msgstr "จำนวนเงินปัจจุบันต้องไม่ติดลบ"
+
+#: app/lib/zod-i18n.ts:58
+msgid "Current amount cannot exceed target amount"
+msgstr "จำนวนเงินปัจจุบันต้องไม่เกินเป้าหมาย"
+
+#: app/lib/zod-i18n.ts:55
+msgid "Current amount must be a number"
+msgstr "จำนวนเงินปัจจุบันต้องเป็นตัวเลข"
+
+#: app/lib/zod-i18n.ts:57
+msgid "Current amount must be a valid number"
+msgstr "จำนวนเงินปัจจุบันต้องเป็นตัวเลขที่ถูกต้อง"
 
 #: app/root.tsx:57
 #: app/routes/dashboard.tsx:15
@@ -88,33 +128,59 @@ msgstr "กำลังสร้าง..."
 msgid "Dashboard"
 msgstr "แดชบอร์ด"
 
-#: app/components/forms/transaction-form.tsx:125
+#: app/components/forms/transaction-form.tsx:108
 msgid "Date"
 msgstr "วันที่"
+
+#: app/lib/zod-i18n.ts:24
+#: app/lib/zod-i18n.ts:44
+msgid "Date is required"
+msgstr "กรุณาระบุวันที่"
+
+#: app/lib/zod-i18n.ts:26
+msgid "Date must be in the future"
+msgstr "วันที่ต้องเป็นอนาคต"
+
+#: app/lib/zod-i18n.ts:25
+#: app/lib/zod-i18n.ts:45
+msgid "Date must be in YYYY-MM-DD format"
+msgstr "วันที่ต้องอยู่ในรูปแบบ ปปปป-ดด-วว"
 
 #: app/routes/goals.tsx:83
 msgid "Deadline"
 msgstr "ครบกำหนด"
 
-#: app/components/forms/goal-form.tsx:119
+#: app/components/forms/goal-form.tsx:109
 msgid "Deadline (Optional)"
 msgstr "วันที่ครบกำหนด (ถ้ามี)"
 
+#: app/lib/zod-i18n.ts:60
+msgid "Deadline must be in the future"
+msgstr "วันครบกำหนดต้องเป็นอนาคต"
+
+#: app/lib/zod-i18n.ts:59
+msgid "Deadline must be in YYYY-MM-DD format"
+msgstr "วันครบกำหนดต้องอยู่ในรูปแบบ ปปปป-ดด-วว"
+
 #: app/routes/goals.tsx:60
-#: app/routes/transactions.tsx:83
+#: app/routes/transactions.tsx:79
 msgid "Delete"
 msgstr "ลบ"
 
-#: app/components/forms/goal-form.tsx:89
+#: app/lib/zod-i18n.ts:43
+msgid "Description must be less than 200 characters"
+msgstr "หมายเหตุต้องไม่เกิน 200 ตัวอักษร"
+
+#: app/components/forms/goal-form.tsx:79
 msgid "e.g. Buy a new car"
 msgstr "เช่น ซื้อรถใหม่"
 
 #: app/routes/goals.tsx:45
-#: app/routes/transactions.tsx:61
+#: app/routes/transactions.tsx:57
 msgid "Error"
 msgstr "ข้อผิดพลาด"
 
-#: app/components/forms/transaction-form.tsx:91
+#: app/components/forms/transaction-form.tsx:77
 #: app/routes/dashboard.tsx:41
 msgid "Expense"
 msgstr "รายจ่าย"
@@ -123,41 +189,77 @@ msgstr "รายจ่าย"
 msgid "Expense by Category"
 msgstr "รายจ่ายแยกตามหมวดหมู่"
 
-#: app/components/forms/goal-form.tsx:56
+#: app/components/forms/goal-form.tsx:54
 msgid "Failed to create goal. Please try again."
 msgstr "สร้างเป้าหมายไม่สำเร็จ กรุณาลองอีกครั้ง"
 
-#: app/components/forms/transaction-form.tsx:58
+#: app/components/forms/transaction-form.tsx:52
 msgid "Failed to create transaction. Please try again."
 msgstr "สร้างรายการไม่สำเร็จ กรุณาลองอีกครั้ง"
 
-#: app/components/forms/goal-form.tsx:87
+#: app/components/forms/goal-form.tsx:77
 msgid "Goal Name"
 msgstr "ชื่อเป้าหมาย"
 
-#: app/components/forms/transaction-form.tsx:92
+#: app/lib/zod-i18n.ts:50
+msgid "Goal name is required"
+msgstr "กรุณาระบุชื่อเป้าหมาย"
+
+#: app/lib/zod-i18n.ts:51
+msgid "Goal name must be less than 100 characters"
+msgstr "ชื่อเป้าหมายต้องไม่เกิน 100 ตัวอักษร"
+
+#: app/components/forms/transaction-form.tsx:78
 #: app/routes/dashboard.tsx:40
 msgid "Income"
 msgstr "รายรับ"
 
 #: app/routes/goals.tsx:42
-#: app/routes/transactions.tsx:58
+#: app/routes/transactions.tsx:54
 msgid "Loading..."
 msgstr "กำลังโหลด..."
+
+#: app/lib/zod-i18n.ts:12
+msgid "Must be a number"
+msgstr "ต้องเป็นตัวเลข"
+
+#: app/lib/zod-i18n.ts:15
+msgid "Must be a valid number"
+msgstr "ต้องเป็นตัวเลขที่ถูกต้อง"
+
+#: app/lib/zod-i18n.ts:16
+msgid "Must be a whole number"
+msgstr "ต้องเป็นจำนวนเต็ม"
+
+#: app/lib/zod-i18n.ts:21
+msgid "Must be at least {min} characters"
+msgstr "ต้องมีอย่างน้อย {min} ตัวอักษร"
+
+#: app/lib/zod-i18n.ts:13
+msgid "Must be greater than 0"
+msgstr "ต้องมากกว่า 0"
+
+#: app/lib/zod-i18n.ts:20
+msgid "Must be less than {max} characters"
+msgstr "ต้องไม่เกิน {max} ตัวอักษร"
+
+#: app/lib/zod-i18n.ts:29
+msgid "Must be one of: {options}"
+msgstr "ต้องเป็นหนึ่งใน: {options}"
 
 #: app/routes/goals.tsx:48
 msgid "No goals yet"
 msgstr "ยังไม่มีเป้าหมาย"
 
-#: app/routes/transactions.tsx:64
+#: app/routes/transactions.tsx:60
 msgid "No transactions this month"
 msgstr "ไม่มีรายการในเดือนนี้"
 
-#: app/components/forms/transaction-form.tsx:135
+#: app/components/forms/transaction-form.tsx:112
 msgid "Note"
 msgstr "หมายเหตุ"
 
-#: app/components/forms/transaction-form.tsx:136
+#: app/components/forms/transaction-form.tsx:112
 msgid "Optional description"
 msgstr "หมายเหตุเพิ่มเติม (ถ้ามี)"
 
@@ -165,7 +267,7 @@ msgstr "หมายเหตุเพิ่มเติม (ถ้ามี)"
 msgid "Personal Finance"
 msgstr "การเงินส่วนบุคคล"
 
-#: app/components/forms/goal-form.tsx:129
+#: app/components/forms/goal-form.tsx:119
 msgid "Progress Preview"
 msgstr "ตัวอย่างความคืบหน้า"
 
@@ -173,15 +275,15 @@ msgstr "ตัวอย่างความคืบหน้า"
 msgid "Remaining"
 msgstr "เหลือ"
 
-#: app/components/forms/transaction-form.tsx:146
+#: app/components/forms/transaction-form.tsx:121
 msgid "Save"
 msgstr "บันทึก"
 
-#: app/components/forms/goal-form.tsx:109
+#: app/components/forms/goal-form.tsx:99
 msgid "Saved Amount (฿)"
 msgstr "ออมไปแล้ว (฿)"
 
-#: app/components/forms/transaction-form.tsx:146
+#: app/components/forms/transaction-form.tsx:121
 msgid "Saving..."
 msgstr "กำลังบันทึก..."
 
@@ -190,7 +292,7 @@ msgstr "กำลังบันทึก..."
 msgid "Savings Goals"
 msgstr "เป้าหมายการออม"
 
-#: app/components/forms/transaction-form.tsx:117
+#: app/components/forms/transaction-form.tsx:103
 msgid "Select Category"
 msgstr "เลือกหมวดหมู่"
 
@@ -202,15 +304,36 @@ msgstr "เลือกภาษา"
 msgid "Select Month"
 msgstr "เลือกเดือน"
 
-#: app/components/forms/goal-form.tsx:98
+#: app/components/forms/goal-form.tsx:88
 msgid "Target Amount (฿)"
 msgstr "เป้าหมาย (฿)"
+
+#: app/lib/zod-i18n.ts:52
+msgid "Target amount must be a number"
+msgstr "เป้าหมายต้องเป็นตัวเลข"
+
+#: app/lib/zod-i18n.ts:54
+msgid "Target amount must be a valid number"
+msgstr "เป้าหมายต้องเป็นตัวเลขที่ถูกต้อง"
+
+#: app/lib/zod-i18n.ts:53
+msgid "Target amount must be greater than 0"
+msgstr "เป้าหมายต้องมากกว่า 0"
+
+#: app/lib/zod-i18n.ts:19
+#: app/lib/zod-i18n.ts:32
+msgid "This field is required"
+msgstr "กรุณากรอกข้อมูล"
 
 #: app/root.tsx:60
 #: app/routes/transactions.tsx:27
 msgid "Transactions"
 msgstr "รายรับ-รายจ่าย"
 
-#: app/components/forms/transaction-form.tsx:89
+#: app/components/forms/transaction-form.tsx:75
 msgid "Type"
 msgstr "ประเภท"
+
+#: app/lib/zod-i18n.ts:40
+msgid "Type must be either income or expense"
+msgstr "ประเภทต้องเป็นรายรับหรือรายจ่าย"

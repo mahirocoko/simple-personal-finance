@@ -1,31 +1,29 @@
 import { z } from 'zod'
+import { goalErrors } from '~/lib/zod-i18n'
 
 /**
  * Zod schema for goal form validation
+ * Uses i18n for error messages to support multiple languages
  */
 export const goalSchema = z
 	.object({
 		name: z
-			.string({ message: 'Goal name is required' })
-			.min(1, 'Goal name is required')
-			.max(100, 'Goal name must be less than 100 characters')
+			.string({ message: goalErrors.nameRequired })
+			.min(1, goalErrors.nameRequired)
+			.max(100, goalErrors.nameTooLong)
 			.trim(),
 
 		target_amount: z
-			.number({ message: 'Target amount must be a number' })
-			.positive('Target amount must be greater than 0')
-			.finite('Target amount must be a valid number'),
+			.number({ message: goalErrors.targetAmountNumber })
+			.positive(goalErrors.targetAmountPositive)
+			.finite(goalErrors.targetAmountValid),
 
 		current_amount: z
-			.number({ message: 'Current amount must be a number' })
-			.nonnegative('Current amount cannot be negative')
-			.finite('Current amount must be a valid number'),
+			.number({ message: goalErrors.currentAmountNumber })
+			.nonnegative(goalErrors.currentAmountNonNegative)
+			.finite(goalErrors.currentAmountValid),
 
-		deadline: z
-			.string()
-			.regex(/^\d{4}-\d{2}-\d{2}$/, 'Deadline must be in YYYY-MM-DD format')
-			.optional()
-			.or(z.literal('')),
+		deadline: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, goalErrors.deadlineFormat).optional().or(z.literal('')),
 	})
 	.refine(
 		(data) => {
@@ -36,7 +34,7 @@ export const goalSchema = z
 			return true
 		},
 		{
-			message: 'Current amount cannot exceed target amount',
+			message: goalErrors.currentExceedsTarget,
 			path: ['current_amount'],
 		},
 	)
@@ -55,7 +53,7 @@ export const goalSchema = z
 			return true
 		},
 		{
-			message: 'Deadline must be in the future',
+			message: goalErrors.deadlineFuture,
 			path: ['deadline'],
 		},
 	)

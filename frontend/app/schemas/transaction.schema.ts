@@ -1,24 +1,28 @@
 import { z } from 'zod'
+import { transactionErrors } from '~/lib/zod-i18n'
 
 /**
  * Zod schema for transaction form validation
+ * Uses i18n for error messages to support multiple languages
  */
 export const transactionSchema = z.object({
 	amount: z
-		.number({ message: 'Amount must be a number' })
-		.positive('Amount must be greater than 0')
-		.finite('Amount must be a valid number'),
+		.number({ message: transactionErrors.amountNumber })
+		.positive(transactionErrors.amountPositive)
+		.finite(transactionErrors.amountValid),
 
-	type: z.enum(['income', 'expense'], { message: 'Type must be either income or expense' }),
+	type: z.enum(['income', 'expense'], { message: transactionErrors.typeInvalid }),
 
 	category_id: z
-		.number({ message: 'Category must be selected' })
-		.int('Category must be a valid ID')
-		.positive('Category must be selected'),
+		.number({ message: transactionErrors.categoryRequired })
+		.int(transactionErrors.categoryValid)
+		.positive(transactionErrors.categoryRequired),
 
-	description: z.string().max(200, 'Description must be less than 200 characters').optional().or(z.literal('')),
+	description: z.string().max(200, transactionErrors.descriptionTooLong).optional().or(z.literal('')),
 
-	date: z.string({ message: 'Date is required' }).regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in YYYY-MM-DD format'),
+	date: z
+		.string({ message: transactionErrors.dateRequired })
+		.regex(/^\d{4}-\d{2}-\d{2}$/, transactionErrors.dateFormat),
 })
 
 /**
