@@ -2,6 +2,7 @@ import { I18nProvider } from '@lingui/react'
 import { useLingui } from '@lingui/react/macro'
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse } from 'react-router'
 import { LocaleSwitcher } from './components/ui/locale-switcher'
+import { ThemeProvider } from './components/theme-provider'
 import { useLocaleSync } from './hooks/use-locale-sync'
 import { i18n } from './lib/i18n'
 
@@ -48,7 +49,7 @@ function AppContent() {
 	return (
 		<div>
 			{/* Navigation */}
-			<nav className="bg-blue-600 text-white p-4 shadow-md">
+			<nav className="bg-primary text-primary-foreground p-4 shadow-md">
 				<div className="container mx-auto flex gap-6 items-center">
 					<a href="/" className="text-xl font-bold">
 						💰 {t`Personal Finance`}
@@ -69,7 +70,7 @@ function AppContent() {
 			</nav>
 
 			{/* Main content */}
-			<main className="min-h-screen bg-gray-50 py-4">
+			<main className="min-h-screen bg-background py-4">
 				<Outlet />
 			</main>
 		</div>
@@ -79,7 +80,14 @@ function AppContent() {
 export default function App() {
 	return (
 		<I18nProvider i18n={i18n}>
-			<AppContent />
+			<ThemeProvider
+				attribute="class"
+				defaultTheme="system"
+				enableSystem={true}
+				disableTransitionOnChange={false}
+			>
+				<AppContent />
+			</ThemeProvider>
 		</I18nProvider>
 	)
 }

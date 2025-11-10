@@ -2,7 +2,9 @@ import { useLingui } from '@lingui/react/macro'
 import type { HTMLInputTypeAttribute } from 'react'
 import type { Control, FieldPath, FieldValues } from 'react-hook-form'
 import { Controller } from 'react-hook-form'
-import { cn } from '~/utils/cn'
+import { Input } from '~/components/ui/input'
+import { Label } from '~/components/ui/label'
+import { cn } from '~/lib/utils'
 
 interface IFormInputProps<TFieldValues extends FieldValues> {
 	name: FieldPath<TFieldValues>
@@ -32,13 +34,13 @@ export function FormInput<TFieldValues extends FieldValues>({
 			name={name}
 			control={control}
 			render={({ field, fieldState }) => (
-				<div className={cn('flex flex-col gap-1', className)}>
-					<label htmlFor={name} className="font-medium text-sm">
+				<div className={cn('flex flex-col gap-2', className)}>
+					<Label htmlFor={name} className={cn(fieldState.error && 'text-destructive')}>
 						{label}
-						{required && <span className="text-red-500 ml-1">*</span>}
-					</label>
+						{required && <span className="text-destructive ml-1">*</span>}
+					</Label>
 
-					<input
+					<Input
 						{...field}
 						id={name}
 						type={type}
@@ -54,17 +56,13 @@ export function FormInput<TFieldValues extends FieldValues>({
 								field.onChange(e)
 							}
 						}}
-						className={cn(
-							'px-3 py-2 border rounded-md',
-							'focus:outline-none focus:ring-2 focus:ring-blue-500',
-							fieldState.error && 'border-red-500',
-						)}
 						aria-invalid={fieldState.error ? 'true' : 'false'}
 						aria-describedby={fieldState.error ? `${name}-error` : undefined}
+						className={cn(fieldState.error && 'border-destructive focus:ring-destructive')}
 					/>
 
 					{fieldState.error && (
-						<span id={`${name}-error`} className="text-red-500 text-sm" role="alert">
+						<span id={`${name}-error`} className="text-destructive text-sm" role="alert">
 							{fieldState.error.message}
 						</span>
 					)}

@@ -1,3 +1,4 @@
+import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
 import { cn } from '~/lib/utils'
 
 export interface ISummaryCardProps {
@@ -6,21 +7,18 @@ export interface ISummaryCardProps {
 	variant: 'income' | 'expense' | 'balance'
 }
 
-const variantStyles: Record<ISummaryCardProps['variant'], { container: string; title: string; amount: string }> = {
+const variantStyles: Record<ISummaryCardProps['variant'], { title: string; amount: string }> = {
 	income: {
-		container: 'bg-green-100',
-		title: 'text-green-800',
-		amount: 'text-green-900',
+		title: 'text-success',
+		amount: 'text-success-foreground',
 	},
 	expense: {
-		container: 'bg-red-100',
-		title: 'text-red-800',
-		amount: 'text-red-900',
+		title: 'text-destructive',
+		amount: 'text-destructive-foreground',
 	},
 	balance: {
-		container: 'bg-blue-100',
-		title: 'text-blue-800',
-		amount: 'text-blue-900',
+		title: 'text-primary',
+		amount: 'text-foreground',
 	},
 }
 
@@ -28,9 +26,13 @@ export function SummaryCard({ title, amount, variant }: ISummaryCardProps) {
 	const styles = variantStyles[variant]
 
 	return (
-		<div className={cn('p-6 rounded-lg shadow', styles.container)}>
-			<h2 className={cn('text-sm font-semibold mb-2', styles.title)}>{title}</h2>
-			<p className={cn('text-3xl font-bold', styles.amount)}>฿{amount.toLocaleString()}</p>
-		</div>
+		<Card className="shadow-md">
+			<CardHeader className="pb-2">
+				<CardTitle className={cn('text-sm font-medium', styles.title)}>{title}</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<p className={cn('text-2xl font-bold', styles.amount)}>฿{amount.toLocaleString()}</p>
+			</CardContent>
+		</Card>
 	)
 }

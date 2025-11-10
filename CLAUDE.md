@@ -4,13 +4,15 @@
 
 | What You Need | Go To |
 | --- | --- |
-| **Quick start with shortcodes** (ccc, nnn, gogogo, rrr, lll) | [`.mahirolab/docs/SHORTCODES.md`](.mahirolab/docs/SHORTCODES.md) |
-| **Complete project overview** (directory layout, all scripts, workflows) | [`.mahirolab/docs/PROJECT_STRUCTURE.md`](.mahirolab/docs/PROJECT_STRUCTURE.md) |
-| **Git commit standards** (conventional commits, emoji guide) | [`.mahirolab/docs/COMMIT_GUIDE.md`](.mahirolab/docs/COMMIT_GUIDE.md) |
-| **Core script usage** (codex-exec, codex-research, codex-worker-launcher) | [Helper Scripts](#helper-scripts) below |
-| **Example workflows** (quick tasks, research, parallel workers, pipelines) | [`.mahirolab/examples/README.md`](.mahirolab/examples/README.md) |
-| **Report templates** (research, worker tasks, code reviews) | [`.mahirolab/templates/README.md`](.mahirolab/templates/README.md) |
-| **Utility tools** (status dashboard, cleanup, maintenance) | [New Utility Scripts](#new-utility-scripts) below |
+| **Quick start with shortcodes** (ccc, nnn, gogogo, rrr, lll) | [Communication Protocol](#communication-protocol) |
+| **Complete project overview** (directory layout, all scripts, workflows) | [Project Structure](#project-structure) |
+| **Git commit standards** (conventional commits, emoji guide) | [Git Commit Guide](#git-commit-guide) |
+| **Core script usage** (codex-exec, codex-research, codex-worker-launcher) | [Helper Scripts](#helper-scripts) |
+| **Frontend best practices** (React 19, TypeScript, patterns) | [Frontend Best Practices](#frontend-best-practices) |
+| **Design system** (shadcn/ui, tokens, themes) | [Design System](#design-system) |
+| **Example workflows** (quick tasks, research, parallel workers, pipelines) | [Examples Library](#examples-library) |
+| **Report templates** (research, worker tasks, code reviews) | [Templates Library](#templates-library) |
+| **Utility tools** (status dashboard, cleanup, maintenance) | [Utility Scripts](#utility-scripts) |
 
 ## 🔴 Critical Safety Notice
 **All helper scripts invoke `codex exec` with `danger-full-access`, granting unrestricted system permissions.**
@@ -198,12 +200,100 @@ Templates include:
 
 ## Communication Protocol
 
-For efficient collaboration between User and Claude, use **Shortcodes** defined in [docs/SHORTCODES.md](docs/SHORTCODES.md):
+### Core Shortcodes
 
-- **`ccc`** - Create context & compact conversation
-- **`nnn`** - Smart planning (auto-runs ccc if needed)
-- **`gogogo`** - Execute most recent plan
-- **`rrr`** - Create session retrospective
-- **`lll`** - List project status
+For efficient collaboration between User and Claude, use these shortcodes:
 
-These shortcodes enable quick, consistent workflow management without verbose instructions. All state files are stored in `.mahirolab/state/` for persistence across sessions.
+#### `ccc` - Create Context & Compact
+**Purpose:** สรุปและบีบอัด conversation ปัจจุบัน
+
+**Claude Action:**
+1. วิเคราะห์ conversation ที่ผ่านมา
+2. สรุปประเด็นสำคัญ (เป้าหมายหลัก, สิ่งที่ทำไปแล้ว, การตัดสินใจที่สำคัญ)
+3. สร้าง context file: `.mahirolab/state/context.md`
+4. แสดง summary กลับมาให้ user ดู
+
+**When to Use:** เริ่มต้น session ใหม่, ก่อนจะวาง plan, เมื่อ conversation ยาวเกินไป
+
+#### `nnn` - Smart Planning
+**Purpose:** สร้าง implementation plan แบบละเอียด
+
+**Claude Action:**
+1. ตรวจสอบว่ามี context ล่าสุดหรือไม่ (อายุ < 1 ชั่วโมง)
+   - ถ้าไม่มีหรือเก่า → รัน `ccc` ก่อนอัตโนมัติ
+2. อ่าน `.mahirolab/state/context.md`
+3. สร้าง detailed plan: `.mahirolab/state/plan_YYYYMMDD_HHMMSS.md`
+4. แสดง plan overview
+
+**When to Use:** เมื่อต้องการแผนงานที่ชัดเจน, ก่อนเริ่มงานใหญ่ๆ
+
+#### `gogogo` - Execute Plan
+**Purpose:** เริ่มดำเนินการตาม plan ล่าสุด
+
+**Claude Action:**
+1. อ่าน plan ล่าสุดจาก `.mahirolab/state/`
+2. ถามยืนยันก่อนเริ่ม (ถ้า user ไม่ได้บอกให้ skip)
+3. Execute tasks ทีละ step:
+   - แสดง task ที่กำลังทำ
+   - ทำงานตาม specification
+   - Update progress ใน `.mahirolab/state/progress.md`
+   - ถามก่อนไป step ถัดไปถ้าเป็น critical task
+4. Report หลังจบแต่ละ phase
+
+**When to Use:** เมื่อพร้อมจะเริ่มทำตาม plan, เมื่ออยากให้ Claude ทำแบบ autonomous
+
+#### `rrr` - Retrospective
+**Purpose:** สร้าง session retrospective
+
+**Claude Action:**
+1. อ่าน context, plan, progress, และ conversation history
+2. วิเคราะห์และสร้าง retrospective
+3. บันทึกลง `.mahirolab/state/retrospective_YYYYMMDD.md`
+
+**When to Use:** จบ session, จบ milestone ใหญ่, ทุกสัปดาห์ (weekly retro)
+
+#### `lll` - List Project Status
+**Purpose:** แสดงภาพรวมสถานะโปรเจกต์
+
+**Claude Action:**
+1. แสดงข้อมูลจากหลายแหล่ง:
+   - Current context (ถ้ามี)
+   - Active plan (ถ้ามี)
+   - Recent progress
+   - Git status
+   - Recent codex jobs
+   - File structure changes
+
+**When to Use:** เริ่มต้น session เพื่อดูว่าค้างอะไรไว้, Check progress ระหว่างทำงาน
+
+### State Management
+
+**Directory Structure:**
+```
+.mahirolab/state/
+├── context.md              # Current session context
+├── plan_YYYYMMDD_HHMMSS.md # Implementation plans
+├── progress.md             # Execution progress tracking
+├── execution_log.md        # Detailed execution log
+└── retrospective_YYYYMMDD.md # Session retrospectives
+```
+
+**Typical Workflow:**
+```bash
+Session Start:
+  User: lll                    # Check status
+  Claude: [shows dashboard]
+
+  User: ccc                    # Create context
+  Claude: [creates context.md, shows summary]
+
+  User: nnn                    # Create plan
+  Claude: [creates plan, shows overview]
+
+  User: gogogo                 # Execute
+  Claude: [executes step-by-step]
+
+Session End:
+  User: rrr                    # Retrospective
+  Claude: [creates retrospective]
+```

@@ -1,4 +1,4 @@
-import { cn } from '~/utils/cn'
+import { cn } from '~/lib/utils'
 
 interface IFormErrorProps {
 	message?: string
@@ -15,7 +15,7 @@ export function FormError({ message, className }: IFormErrorProps) {
 	}
 
 	return (
-		<div className={cn('text-red-500 text-sm mt-1', className)} role="alert" aria-live="polite">
+		<div className={cn('text-destructive text-sm font-medium', className)} role="alert" aria-live="polite">
 			{message}
 		</div>
 	)
