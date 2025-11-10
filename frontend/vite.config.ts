@@ -6,13 +6,13 @@ import macrosPlugin from 'vite-plugin-babel-macros'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-	plugins: [reactRouter(), tailwindcss(), tsconfigPaths(), lingui(), macrosPlugin()],
-	server: {
-		proxy: {
-			'/api': {
-				target: 'http://localhost:3000',
-				changeOrigin: true,
-			},
-		},
-	},
+  plugins: [reactRouter(), tailwindcss(), tsconfigPaths(), lingui(), macrosPlugin()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    },
+  },
 })

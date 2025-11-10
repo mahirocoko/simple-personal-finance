@@ -10,8 +10,8 @@ export const defaultLocale = DEFAULT_LOCALE
 
 // Load all locale messages
 i18n.load({
-	en: enMessages,
-	th: thMessages,
+  en: enMessages,
+  th: thMessages,
 })
 
 // Activate saved locale or default (with validation)

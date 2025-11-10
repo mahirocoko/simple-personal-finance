@@ -10,13 +10,13 @@ i18n.activate('en')
 
 // Mock msg macro for tests
 vi.mock('@lingui/core/macro', () => ({
-	msg: (strings: TemplateStringsArray, ...values: unknown[]) => {
-		// Return a message descriptor that i18n can use
-		return { id: strings.join(''), message: strings.join(''), values }
-	},
+  msg: (strings: TemplateStringsArray, ...values: unknown[]) => {
+    // Return a message descriptor that i18n can use
+    return { id: strings.join(''), message: strings.join(''), values }
+  },
 }))
 
 // Cleanup after each test
 afterEach(() => {
-	cleanup()
+  cleanup()
 })
