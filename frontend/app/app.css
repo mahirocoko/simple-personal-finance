@@ -4,29 +4,30 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-	--font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-		"Noto Color Emoji";
-	--font-mono: "JetBrains Mono Variable", "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+	--font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	--font-mono: "JetBrains Mono Variable", "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Consolas,
+		"Liberation Mono", Menlo, monospace;
 
 	/* ===== TYPOGRAPHY TOKENS ===== */
 	/* Font Size Scale (USWDS ≥16px body + Minor Third ratio) */
-	--font-size-xs: 0.75rem;     /* 12px - Fine print, labels */
-	--font-size-sm: 0.875rem;    /* 14px - Secondary text */
-	--font-size-base: 1rem;      /* 16px - Body copy (default) */
-	--font-size-lg: 1.125rem;    /* 18px - Lead paragraphs */
-	--font-size-xl: 1.25rem;     /* 20px - H5 */
-	--font-size-2xl: 1.5rem;     /* 24px - H4 */
-	--font-size-3xl: 1.875rem;   /* 30px - H3 */
-	--font-size-4xl: 2.25rem;    /* 36px - H2 */
-	--font-size-5xl: 3rem;       /* 48px - H1 */
-	--font-size-6xl: 3.75rem;    /* 60px - Display */
-	--font-size-7xl: 4.5rem;     /* 72px - Large Display */
+	--font-size-xs: 0.75rem; /* 12px - Fine print, labels */
+	--font-size-sm: 0.875rem; /* 14px - Secondary text */
+	--font-size-base: 1rem; /* 16px - Body copy (default) */
+	--font-size-lg: 1.125rem; /* 18px - Lead paragraphs */
+	--font-size-xl: 1.25rem; /* 20px - H5 */
+	--font-size-2xl: 1.5rem; /* 24px - H4 */
+	--font-size-3xl: 1.875rem; /* 30px - H3 */
+	--font-size-4xl: 2.25rem; /* 36px - H2 */
+	--font-size-5xl: 3rem; /* 48px - H1 */
+	--font-size-6xl: 3.75rem; /* 60px - Display */
+	--font-size-7xl: 4.5rem; /* 72px - Large Display */
 
 	/* Line Height System (USWDS ≥1.5 for accessibility) */
 	--line-height-none: 1;
 	--line-height-tight: 1.25;
 	--line-height-snug: 1.375;
-	--line-height-normal: 1.5;   /* ≥1.5 for accessibility */
+	--line-height-normal: 1.5; /* ≥1.5 for accessibility */
 	--line-height-relaxed: 1.75;
 	--line-height-loose: 2;
 
@@ -41,7 +42,7 @@
 	--font-weight-black: 900;
 
 	/* Letter Spacing Tokens */
-	--tracking-tighter: -0.05em;  /* Large headings only */
+	--tracking-tighter: -0.05em; /* Large headings only */
 	--tracking-tight: -0.025em;
 	--tracking-normal: 0;
 	--tracking-wide: 0.025em;
@@ -54,45 +55,45 @@
 
 /* Primary Brand Color - Subtle Desaturated Blue (Linear-inspired) */
 :root {
-	--color-primary-50:  oklch(0.97 0.01 250);
+	--color-primary-50: oklch(0.97 0.01 250);
 	--color-primary-100: oklch(0.94 0.02 250);
 	--color-primary-200: oklch(0.87 0.04 250);
 	--color-primary-300: oklch(0.78 0.06 250);
-	--color-primary-400: oklch(0.68 0.10 250);
-	--color-primary-500: oklch(0.60 0.15 250); /* Base - #5E6AD2 equivalent */
+	--color-primary-400: oklch(0.68 0.1 250);
+	--color-primary-500: oklch(0.6 0.15 250); /* Base - #5E6AD2 equivalent */
 	--color-primary-600: oklch(0.52 0.16 250);
 	--color-primary-700: oklch(0.44 0.15 250);
 	--color-primary-800: oklch(0.36 0.12 250);
 	--color-primary-900: oklch(0.28 0.09 250);
-	--color-primary-950: oklch(0.20 0.06 250);
+	--color-primary-950: oklch(0.2 0.06 250);
 
 	/* Neutral - High Contrast (Vercel-inspired) */
-	--color-neutral-50:  oklch(0.99 0.00 0);
-	--color-neutral-100: oklch(0.97 0.00 0);
-	--color-neutral-200: oklch(0.93 0.00 0);
-	--color-neutral-300: oklch(0.87 0.00 0);
-	--color-neutral-400: oklch(0.72 0.00 0);
-	--color-neutral-500: oklch(0.56 0.00 0);
-	--color-neutral-600: oklch(0.45 0.00 0);
-	--color-neutral-700: oklch(0.36 0.00 0);
-	--color-neutral-800: oklch(0.26 0.00 0);
-	--color-neutral-900: oklch(0.18 0.00 0);
-	--color-neutral-950: oklch(0.10 0.00 0);
+	--color-neutral-50: oklch(0.99 0.0 0);
+	--color-neutral-100: oklch(0.97 0.0 0);
+	--color-neutral-200: oklch(0.93 0.0 0);
+	--color-neutral-300: oklch(0.87 0.0 0);
+	--color-neutral-400: oklch(0.72 0.0 0);
+	--color-neutral-500: oklch(0.56 0.0 0);
+	--color-neutral-600: oklch(0.45 0.0 0);
+	--color-neutral-700: oklch(0.36 0.0 0);
+	--color-neutral-800: oklch(0.26 0.0 0);
+	--color-neutral-900: oklch(0.18 0.0 0);
+	--color-neutral-950: oklch(0.1 0.0 0);
 
 	/* Semantic Colors (Radix Colors 12-step scales) */
 	/* Success - Green */
 	--color-success-50: oklch(0.97 0.02 150);
 	--color-success-100: oklch(0.94 0.04 150);
 	--color-success-200: oklch(0.88 0.07 150);
-	--color-success-300: oklch(0.82 0.10 150);
-	--color-success-400: oklch(0.70 0.12 150);
-	--color-success-500: oklch(0.60 0.14 150);
+	--color-success-300: oklch(0.82 0.1 150);
+	--color-success-400: oklch(0.7 0.12 150);
+	--color-success-500: oklch(0.6 0.14 150);
 	--color-success-600: oklch(0.52 0.14 150);
 	--color-success-700: oklch(0.44 0.12 150);
 	--color-success-800: oklch(0.36 0.09 150);
 	--color-success-900: oklch(0.28 0.06 150);
 	--color-success-950: oklch(0.18 0.04 150);
-	--color-success-on: oklch(0.99 0.00 0); /* High contrast text */
+	--color-success-on: oklch(0.99 0.0 0); /* High contrast text */
 
 	/* Warning - Amber */
 	--color-warning-50: oklch(0.98 0.01 60);
@@ -100,50 +101,50 @@
 	--color-warning-200: oklch(0.91 0.04 60);
 	--color-warning-300: oklch(0.85 0.07 60);
 	--color-warning-400: oklch(0.77 0.09 60);
-	--color-warning-500: oklch(0.70 0.12 60);
+	--color-warning-500: oklch(0.7 0.12 60);
 	--color-warning-600: oklch(0.62 0.13 60);
 	--color-warning-700: oklch(0.52 0.11 60);
 	--color-warning-800: oklch(0.42 0.08 60);
 	--color-warning-900: oklch(0.32 0.06 60);
-	--color-warning-950: oklch(0.20 0.04 60);
-	--color-warning-on: oklch(0.20 0.00 0);
+	--color-warning-950: oklch(0.2 0.04 60);
+	--color-warning-on: oklch(0.2 0.0 0);
 
 	/* Error - Red */
 	--color-error-50: oklch(0.97 0.02 20);
 	--color-error-100: oklch(0.94 0.04 20);
 	--color-error-200: oklch(0.88 0.07 20);
-	--color-error-300: oklch(0.82 0.10 20);
+	--color-error-300: oklch(0.82 0.1 20);
 	--color-error-400: oklch(0.72 0.14 20);
 	--color-error-500: oklch(0.58 0.18 20);
-	--color-error-600: oklch(0.50 0.18 20);
+	--color-error-600: oklch(0.5 0.18 20);
 	--color-error-700: oklch(0.42 0.15 20);
 	--color-error-800: oklch(0.34 0.11 20);
 	--color-error-900: oklch(0.26 0.08 20);
 	--color-error-950: oklch(0.16 0.05 20);
-	--color-error-on: oklch(0.99 0.00 0);
+	--color-error-on: oklch(0.99 0.0 0);
 
 	/* Info - Blue */
 	--color-info-50: oklch(0.97 0.02 230);
 	--color-info-100: oklch(0.94 0.04 230);
 	--color-info-200: oklch(0.88 0.07 230);
-	--color-info-300: oklch(0.82 0.10 230);
+	--color-info-300: oklch(0.82 0.1 230);
 	--color-info-400: oklch(0.72 0.12 230);
 	--color-info-500: oklch(0.62 0.14 230);
 	--color-info-600: oklch(0.54 0.14 230);
 	--color-info-700: oklch(0.46 0.12 230);
 	--color-info-800: oklch(0.38 0.09 230);
-	--color-info-900: oklch(0.30 0.06 230);
-	--color-info-950: oklch(0.20 0.04 230);
-	--color-info-on: oklch(0.99 0.00 0);
+	--color-info-900: oklch(0.3 0.06 230);
+	--color-info-950: oklch(0.2 0.04 230);
+	--color-info-on: oklch(0.99 0.0 0);
 
 	/* Secondary/Accent - Stripe Purple #635BFF */
 	--color-accent-50: oklch(0.97 0.02 280);
 	--color-accent-100: oklch(0.94 0.04 280);
 	--color-accent-200: oklch(0.88 0.07 280);
-	--color-accent-300: oklch(0.82 0.10 280);
+	--color-accent-300: oklch(0.82 0.1 280);
 	--color-accent-400: oklch(0.72 0.15 280);
-	--color-accent-500: oklch(0.58 0.20 280);
-	--color-accent-600: oklch(0.50 0.18 280);
+	--color-accent-500: oklch(0.58 0.2 280);
+	--color-accent-600: oklch(0.5 0.18 280);
 	--color-accent-700: oklch(0.42 0.15 280);
 	--color-accent-800: oklch(0.34 0.11 280);
 	--color-accent-900: oklch(0.26 0.08 280);
@@ -202,18 +203,18 @@
 	--border-focus: var(--ring);
 
 	/* Component spacing tokens (4px/8px grid system) */
-	--space-component-xs: 0.25rem;   /* 4px */
-	--space-component-sm: 0.5rem;    /* 8px */
-	--space-component-md: 1rem;      /* 16px */
-	--space-component-lg: 1.5rem;    /* 24px */
-	--space-component-xl: 2rem;      /* 32px */
+	--space-component-xs: 0.25rem; /* 4px */
+	--space-component-sm: 0.5rem; /* 8px */
+	--space-component-md: 1rem; /* 16px */
+	--space-component-lg: 1.5rem; /* 24px */
+	--space-component-xl: 2rem; /* 32px */
 
 	/* Section spacing tokens for layout */
-	--space-section-xs: 1rem;        /* 16px */
-	--space-section-sm: 2rem;        /* 32px */
-	--space-section-md: 4rem;        /* 64px */
-	--space-section-lg: 6rem;        /* 96px */
-	--space-section-xl: 8rem;        /* 128px */
+	--space-section-xs: 1rem; /* 16px */
+	--space-section-sm: 2rem; /* 32px */
+	--space-section-md: 4rem; /* 64px */
+	--space-section-lg: 6rem; /* 96px */
+	--space-section-xl: 8rem; /* 128px */
 
 	/* Focus and interaction tokens */
 	--focus-ring-width: 2px;
@@ -339,7 +340,12 @@ body {
 }
 
 /* Heading base styles */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	font-family: var(--font-sans);
 	font-weight: var(--font-weight-semibold);
 	line-height: var(--line-height-tight);
@@ -486,10 +492,10 @@ pre code {
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+	* {
+		@apply border-border outline-ring/50;
 	}
-  body {
-    @apply bg-background text-foreground;
+	body {
+		@apply bg-background text-foreground;
 	}
 }

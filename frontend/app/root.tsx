@@ -1,8 +1,8 @@
 import { I18nProvider } from '@lingui/react'
 import { useLingui } from '@lingui/react/macro'
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse } from 'react-router'
-import { LocaleSwitcher } from './components/ui/locale-switcher'
 import { ThemeProvider } from './components/theme-provider'
+import { LocaleSwitcher } from './components/ui/locale-switcher'
 import { useLocaleSync } from './hooks/use-locale-sync'
 import { i18n } from './lib/i18n'
 
@@ -80,12 +80,7 @@ function AppContent() {
 export default function App() {
 	return (
 		<I18nProvider i18n={i18n}>
-			<ThemeProvider
-				attribute="class"
-				defaultTheme="system"
-				enableSystem={true}
-				disableTransitionOnChange={false}
-			>
+			<ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange={false}>
 				<AppContent />
 			</ThemeProvider>
 		</I18nProvider>

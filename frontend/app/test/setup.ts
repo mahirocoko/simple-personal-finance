@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest'
+import { i18n } from '@lingui/core'
 import { cleanup } from '@testing-library/react'
 import { afterEach, vi } from 'vitest'
-import { i18n } from '@lingui/core'
 import { messages as enMessages } from '../locales/en/messages'
 
 // Initialize i18n for tests

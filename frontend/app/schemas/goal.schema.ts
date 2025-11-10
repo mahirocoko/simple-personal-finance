@@ -23,7 +23,11 @@ export const goalSchema = z
 			.nonnegative(goalErrors.currentAmountNonNegative)
 			.finite(goalErrors.currentAmountValid),
 
-		deadline: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, goalErrors.deadlineFormat).optional().or(z.literal('')),
+		deadline: z
+			.string()
+			.regex(/^\d{4}-\d{2}-\d{2}$/, goalErrors.deadlineFormat)
+			.optional()
+			.or(z.literal('')),
 	})
 	.refine(
 		(data) => {
