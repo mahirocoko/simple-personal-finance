@@ -753,8 +753,8 @@ export function LoginForm() {
 
 ## shadcn/ui Component Library
 
-**Documentation:** `.mahirolab/docs/shadcn-ui/` (comprehensive guide and migration patterns)
-**Research Reports:** `.mahirolab/research/` (5 deep-dive reports completed Nov 11, 2025)
+**Documentation:** `.mahirolab/docs/shadcn-ui/` (comprehensive guides, components, patterns)
+**Research Reports:** `.mahirolab/research/` (4 deep-dive reports completed Nov 11, 2025)
 **Compatibility:** React 19, Next.js 15, Tailwind CSS v4, TypeScript
 
 ### 🚀 Quick Start
@@ -826,8 +826,17 @@ import { toast } from "sonner"
 .mahirolab/docs/shadcn-ui/
 ├── README.md                 # Complete integration guide
 ├── migration-guide.md        # HTML → shadcn/ui patterns
+├── INDEX.md                  # Documentation index and navigation
 ├── components/              # Individual component docs
-└── patterns/               # Usage patterns (forms, navigation)
+│   ├── FORM-COMPONENTS.md   # Forms, inputs, validation
+│   ├── DATA-DISPLAY.md      # Tables, cards, charts
+│   ├── FEEDBACK-OVERLAYS.md # Dialogs, toasts, menus
+│   └── ADVANCED-COMPONENTS.md # Calendar, color picker, slider
+└── patterns/               # Usage patterns
+    ├── FORMS.md            # Form best practices
+    ├── NAVIGATION.md       # Navigation patterns
+    ├── LAYOUT.md           # Layout systems
+    └── ACCESSIBILITY.md    # WCAG & ARIA patterns
 ```
 
 ### 🧪 Best Practices
@@ -839,11 +848,12 @@ import { toast } from "sonner"
 
 ### 📚 Research Sources
 Comprehensive research reports (Nov 11, 2025):
-- Form Components Deep Dive (`20251111_104022_*`)
-- Navigation & Layout Deep Dive (`20251111_104028_*`)
-- Data Display Deep Dive (`20251111_104037_*`)
-- Feedback & Overlays Deep Dive (`20251111_104043_*`)
-- Advanced Components Deep Dive (`20251111_104048_*`)
+- Form Components Deep Dive (`20251111_104022_*`) - Latest button variants, form patterns
+- Data Display Deep Dive (`20251111_104037_*`) - Responsive tables, charts, data patterns
+- Feedback & Overlays Deep Dive (`20251111_104043_*`) - Toast migration, dialog patterns
+- Advanced Components Deep Dive (`20251111_104048_*`) - EyeDropper API, timezone support
+
+**Note:** Research content has been extracted and organized into accessible documentation in the components/ and patterns/ directories above.
 
 ---
 

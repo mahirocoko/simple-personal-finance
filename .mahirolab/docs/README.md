@@ -61,6 +61,30 @@ Complete guide for:
 
 ---
 
+### [shadcn-ui/](shadcn-ui/)
+**Component library documentation**
+
+Complete shadcn/ui integration guide covering:
+- Component documentation and usage patterns
+- Form best practices and validation
+- Layout and navigation patterns
+- Accessibility guidelines (WCAG 2.1 compliance)
+- Migration patterns from HTML to shadcn/ui
+
+**Key documentation:**
+- **[README.md](shadcn-ui/README.md)** - Complete integration guide
+- **[Components](shadcn-ui/components/)** - Individual component documentation
+- **[Patterns](shadcn-ui/patterns/)** - Usage patterns and best practices
+
+**When to read:**
+- Setting up new components
+- Implementing forms and validation
+- Creating responsive layouts
+- Ensuring accessibility compliance
+- Migrating existing UI components
+
+---
+
 ## 🚀 Getting Started
 
 **New to this project?**
