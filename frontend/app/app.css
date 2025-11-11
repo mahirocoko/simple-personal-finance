@@ -1,6 +1,24 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* shadcn/ui Select Scroll Lock Bug Fix (#4227) - Research Applied Nov 11, 2025 */
+body[data-scroll-locked] {
+  overflow: hidden;
+  padding-right: var(--removed-body-scroll-bar-width, 0px);
+}
+
+/* Alternative comprehensive fix for all scrollable overlays */
+[data-scroll-locked] {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Ensure proper scroll restoration */
+body:not([data-scroll-locked]) {
+  overflow: auto;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {

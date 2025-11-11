@@ -9,7 +9,8 @@
 | **Git commit standards** (conventional commits, emoji guide) | [Git Commit Guide](#git-commit-guide) |
 | **Core script usage** (codex-exec, codex-research, codex-worker-launcher) | [Helper Scripts](#helper-scripts) |
 | **Frontend best practices** (React 19, TypeScript, patterns) | [Frontend Best Practices](#frontend-best-practices) |
-| **Design system** (shadcn/ui, tokens, themes) | [Design System](#design-system) |
+| **shadcn/ui component library** (comprehensive guide, migration, patterns) | [shadcn/ui Component Library](#shadcn-ui-component-library) |
+| **Design system** (OKLCH tokens, themes, accessibility) | [Design System](#design-system) |
 | **Example workflows** (quick tasks, research, parallel workers, pipelines) | [Examples Library](#examples-library) |
 | **Report templates** (research, worker tasks, code reviews) | [Templates Library](#templates-library) |
 | **Utility tools** (status dashboard, cleanup, maintenance) | [Utility Scripts](#utility-scripts) |
@@ -749,6 +750,102 @@ export function LoginForm() {
   }
 }
 ```
+
+## shadcn/ui Component Library
+
+**Documentation:** `.mahirolab/docs/shadcn-ui/` (comprehensive guide and migration patterns)
+**Research Reports:** `.mahirolab/research/` (5 deep-dive reports completed Nov 11, 2025)
+**Compatibility:** React 19, Next.js 15, Tailwind CSS v4, TypeScript
+
+### 🚀 Quick Start
+
+```bash
+# Initialize shadcn/ui
+npx shadcn@latest init
+
+# Install core components
+npx shadcn@latest add button input card dialog navigation-menu
+
+# For forms with validation
+npx shadcn@latest add form select checkbox radio-group textarea
+npm install react-hook-form @hookform/resolvers zod
+```
+
+### 📚 Component Categories & Key Updates
+
+#### Form Components ✅ (Updated Sep 2025)
+- **Button:** 9 variants + new `icon-sm`/`icon-lg` sizes (Sep 24, 2025)
+- **Input:** Enhanced label/helper patterns, file upload support (Sep 18, 2025)
+- **Form:** React Hook Form + Zod integration scaffold (Beta status)
+
+#### Navigation & Layout 🧭
+- **NavigationMenu:** `useIsMobile` hook for responsive switching
+- **Tabs:** WAI-ARIA manual/automatic activation patterns
+- **Sidebar:** Cookie management, cmd/ctrl+b shortcuts, collapsible states
+
+#### Data Display 📊
+- **Data Table:** TanStack integration, mobile scroll fallbacks
+- **Chart:** Recharts primitives, v3 upgrade incoming
+- **Card/Avatar/Badge:** Responsive patterns with data-slot hooks
+
+#### ⚠️ Critical Updates (Feb 2025)
+- **Toast:** **DEPRECATED** → migrate to Sonner immediately
+- **CLI 3.0:** Registry overhaul with namespaced components
+- **Select:** Known scroll lock bug (#4227) - requires CSS workaround
+
+#### Advanced Components ⚙️
+- **Color Picker:** EyeDropper API (HTTPS required)
+- **Calendar:** Timezone-aware rendering, multilingual support
+- **Slider:** Multi-thumb ranges, Radix 1.3.6 compatibility
+
+### 🔧 Known Issues & Fixes
+
+#### Select Scroll Lock Bug (#4227)
+```css
+/* Apply globally */
+body[data-scroll-locked] {
+  overflow: hidden;
+  padding-right: var(--removed-body-scroll-bar-width, 0px);
+}
+```
+
+#### Toast Migration to Sonner
+```bash
+# Install
+npx shadcn@latest add sonner
+
+# Replace usage
+// ❌ Before
+const { toast } = useToast()
+// ✅ After
+import { toast } from "sonner"
+```
+
+### 📖 Documentation Structure
+```
+.mahirolab/docs/shadcn-ui/
+├── README.md                 # Complete integration guide
+├── migration-guide.md        # HTML → shadcn/ui patterns
+├── components/              # Individual component docs
+└── patterns/               # Usage patterns (forms, navigation)
+```
+
+### 🧪 Best Practices
+- Use `Label htmlFor` associations for all form controls
+- Apply data-state hooks for styling, maintain semantic structure
+- Test both light/dark modes (OKLCH token system)
+- Ensure full keyboard navigation support
+- Migrate Toast to Sonner immediately
+
+### 📚 Research Sources
+Comprehensive research reports (Nov 11, 2025):
+- Form Components Deep Dive (`20251111_104022_*`)
+- Navigation & Layout Deep Dive (`20251111_104028_*`)
+- Data Display Deep Dive (`20251111_104037_*`)
+- Feedback & Overlays Deep Dive (`20251111_104043_*`)
+- Advanced Components Deep Dive (`20251111_104048_*`)
+
+---
 
 ## Design System
 

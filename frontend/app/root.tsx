@@ -3,8 +3,10 @@ import { useLingui } from '@lingui/react/macro'
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse } from 'react-router'
 import { ThemeProvider } from './components/theme-provider'
 import { LocaleSwitcher } from './components/ui/locale-switcher'
+import { Toaster } from './components/ui/sonner'
 import { useLocaleSync } from './hooks/use-locale-sync'
 import { i18n } from './lib/i18n'
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from './components/ui/navigation-menu'
 
 import type { Route } from './+types/root'
 import './app.css'
@@ -50,22 +52,36 @@ function AppContent() {
     <div>
       {/* Navigation */}
       <nav className="bg-primary text-primary-foreground p-4 shadow-md">
-        <div className="container mx-auto flex gap-6 items-center">
-          <a href="/" className="text-xl font-bold">
-            💰 {t`Personal Finance`}
-          </a>
-          <a href="/" className="hover:underline">
-            {t`Dashboard`}
-          </a>
-          <a href="/transactions" className="hover:underline">
-            {t`Transactions`}
-          </a>
-          <a href="/goals" className="hover:underline">
-            {t`Savings Goals`}
-          </a>
-          <div className="ml-auto">
-            <LocaleSwitcher />
-          </div>
+        <div className="container mx-auto">
+          <NavigationMenu className="flex items-center gap-6">
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/" className="text-xl font-bold hover:text-primary-foreground/80 transition-colors">
+                💰 {t`Personal Finance`}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/" className="hover:text-primary-foreground/80 transition-colors">
+                {t`Dashboard`}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/transactions" className="hover:text-primary-foreground/80 transition-colors">
+                {t`Transactions`}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink href="/goals" className="hover:text-primary-foreground/80 transition-colors">
+                {t`Savings Goals`}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <div className="ml-auto">
+              <LocaleSwitcher />
+            </div>
+          </NavigationMenu>
         </div>
       </nav>
 
@@ -82,6 +98,7 @@ export default function App() {
     <I18nProvider i18n={i18n}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange={false}>
         <AppContent />
+        <Toaster />
       </ThemeProvider>
     </I18nProvider>
   )

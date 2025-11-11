@@ -2,6 +2,8 @@ import { useLingui } from '@lingui/react/macro'
 import { ErrorMessage } from '~/components/ui/error-message'
 import { LoadingSpinner } from '~/components/ui/loading-spinner'
 import { SummaryCard } from '~/components/ui/summary-card'
+import { Badge } from '~/components/ui/badge'
+import { Separator } from '~/components/ui/separator'
 import { useTransactionSummary } from '../hooks/use-transactions'
 
 export default function Dashboard() {
@@ -44,21 +46,28 @@ export default function Dashboard() {
 
       {/* Category Breakdown */}
       {summary?.categoryBreakdown && summary.categoryBreakdown.length > 0 && (
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="bg-card text-card-foreground p-6 rounded-lg shadow">
           <h2 className="text-xl font-bold mb-4">{t`Expense by Category`}</h2>
           <div className="space-y-3">
             {summary.categoryBreakdown
               .filter((cat: any) => cat.type === 'expense')
               .map((category: any) => (
-                <div key={category.id} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl">{category.icon}</span>
-                    <span className="font-medium">{category.name}</span>
+                <div key={category.id}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{category.icon}</span>
+                      <span className="font-medium">{category.name}</span>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold">฿{category.total_amount.toLocaleString()}</p>
+                      <Badge variant="secondary" className="text-xs">
+                        {t`${category.transaction_count} transactions`}
+                      </Badge>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-bold">฿{category.total_amount.toLocaleString()}</p>
-                    <p className="text-sm text-gray-500">{t`${category.transaction_count} transactions`}</p>
-                  </div>
+                  {category !== summary.categoryBreakdown[summary.categoryBreakdown.length - 1] && (
+                    <Separator className="mt-3" />
+                  )}
                 </div>
               ))}
           </div>
